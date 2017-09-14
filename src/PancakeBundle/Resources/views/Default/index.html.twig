@@ -1,0 +1,11 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+<p>Hello World!</p>
+{% set check = false %}
+{% if check %}
+	<a class="btn btn-lg btn-success" href="#" role="button">Get started today</a>
+{% else %}
+	<a class="btn btn-lg btn-warning" href="#" role="button">Get started tomorrow</a>
+{% endif %}
+{% endblock %}
