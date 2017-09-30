@@ -1,0 +1,58 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+    <h2>Créer un compte</h2>
+
+    <div class="row">
+        <div class="col"></div>
+
+        <div class="well col-5">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            {# Les erreurs générales du formulaire. #}
+            {{ form_errors(form) }}
+
+            <div class="form-group">
+                {{ form_label(form.name, "Prénom", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.last_name, "Nom", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.last_name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.email, "Email", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.phone, "Numéro de téléphone", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.plainPassword.second, "Confirmation du mot de passe", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+            {{ form_end(form) }}
+        </div>
+
+        <div class="col"></div>
+    </div>
+{% endblock %}
