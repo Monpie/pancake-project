@@ -1,9 +1,9 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 
-{% block head %}
-    <title> Crêpe à gogo !</title>
-{% endblock %}
+    {% block head %}
+        <title> Crêpe à gogo !</title>
+    {% endblock %}
 
 {% block body %}
 
@@ -54,65 +54,73 @@
 
             </ul>
         </div>
-        <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    </div>-->
+     
     </nav>
     {% endblock %}
 
 
     <!-- Barre déroulante des offres -->
     {% block carousel %}
-    <div class="row">
-        <div class="col-3">
-            <a href="{{path('crepes')}}"><img class="d-block " src="/bundles/images/crepe.png" height="200" alt="First slide">
-            </a>
-            <center>
-                    <h1> Consulter Crepe ! </h1>
-            </center>
-        </div>
-        <div class="col-6">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a href="{{path('crepes')}}"><img class="d-block w-100" src="/bundles/images/crepe1.jpg" height="300" alt="First slide"></a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Slide 1</h3>
-                            <p>Chocolat fraise</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="{{path('crepes')}}"><img class="d-block w-100" src="/bundles/images/crepe2.jpg" height="300" alt="Second slide"></a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Slide 2</h3>
-                            <p>Chocolat</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="{{path('crepes')}}"> <img class="d-block w-100" src="/bundles/images/crepe3.jpg" height="300"  alt="Third slide"></a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Slide 3</h3>
-                            <p>Chocolat fraise</p>
-                        </div>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="{{path('crepes')}}">
+                        {% if pancake.findOneByName('Crêpe 1')==null %}
+                        Aucun produit trouvé
+                        {% else %}
+                        <img class="d-block w-100" src="{{pancake.findOneByName('Crêpe 1').image}}" height="500" alt="First slide">
+                        {% endif %}
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Slide 1</h3>
+                        <p>Chocolat fraise</p>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <div class="carousel-item">
+                    <a href="{{path('crepes')}}">
+                        {% if pancake.findOneByName('Crêpe 2')==null %}
+                        Aucun produit trouvé
+                        {% else %}
+                        <img class="d-block w-100" src="{{pancake.findOneByName('Crêpe 2').image}}" height="500" alt="Second slide">
+                        {% endif %}
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Slide 2</h3>
+                        <p>Chocolat</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <a href="{{path('crepes')}}">
+                        {% if pancake.findOneByName('Crêpe 3')==null %}
+                        Aucun produit trouvé
+                        {% else %}
+                        <img class="d-block w-100" src="pancake->findOneByName('Crêpe 3').image" height="500" alt="Third slide">
+                        {% endif %}
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Slide 3</h3>
+                        <p>Chocolat fraise</p>
+                    </div>
+                </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
 
             <div style="background-color:powderblue;">
                 <center>
@@ -130,112 +138,10 @@
         </div>
         {% endblock %}
 
+       
+
+        {% endblock %}
+
         
-        <!--{% block images %}
-    <div class="row">
-    <div class="col-4" >
-    <a  href="{{path('details-crepe')}}"><img src="/bundles/images/crepe1.jpg"  alt="crêpe 1" title="Crêpe 1" /></a>
-    <p>Crêpe numéro 1</p>
-    <p>
-    Prix : 4.95€
-    </p>
-    </div>
-    <div class="col-4">
-    <a href="{{path('crepes')}}"> <img src="/bundles/images/crepe2.jpg"  alt="crêpe 2" /> </a>
-    <p>Crêpe numéro 2</p>
-    <p>
-    Prix : 4.95€
-    </p>
-    </div>
-    <div class="col-4">
-    <img src="/bundles/images/crepe3.jpg"  alt="crêpe 3" />
-    <p>Crêpe numéro 3</p>
-    <p>
-    Prix : 4.95€
-    </p>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-4">
-    <img src="/bundles/images/crepe4.jpg" alt="crêpe 4" />
+   
 
-    </div>
-    <div class="col-4">
-    <img src="/bundles/images/crepe5.jpg" alt="crêpe 5" />
-
-    </div>
-    <div class="col-4">
-    <img src="/bundles/images/crepe8.jpg" alt="test-crepes" />
-
-    </div>
-    </div>
-    -->
-
-        <!--<dialog id="favDialog" >
-    <form method="dialog">
-    <section>
-    <p><label for="favAnimal">Crêpe numéro 1
-    <p><img src="/bundles/images/crepe1.jpg" height="100"  alt="crêpe 1" title="Crêpe 1" /></p></label>
-    </section>
-    <menu>
-    <button id="cancel" type="reset">Annuler</button>
-    <button type="submit">Ajouter au panier</button>
-    </menu>
-    </form>
-    </dialog>
-
-    <menu>
-    <button id="updateDetails" ><img src="/bundles/images/crepe1.jpg" alt="crêpe 1" title="Crêpe 1" /></button>
-    </menu>
-    -->
-        <!--<script>
-    (function() {
-    var updateButton = document.getElementById('updateDetails');
-    var cancelButton = document.getElementById('cancel');
-
-    // Update button opens a modal dialog
-    updateButton.addEventListener('click', function() {
-    document.getElementById('favDialog').showModal();
-    });
-
-    // Bouton pour fermer la boîte de dialogue
-    cancelButton.addEventListener('click', function() {           
-    document.getElementById('favDialog').close();
-
-    });
-
-    })();
-    </script>-->
-
-        {% endblock %}
-
-        {% block javascripts %}
-        <script>
-            (function() {
-                var updateButton = document.getElementById('updateDetails');
-                var cancelButton = document.getElementById('cancel');
-
-                // Update button opens a modal dialog
-                updateButton.addEventListener('click', function() {
-                    document.getElementById('favDialog').showModal();
-                });
-
-                // Bouton pour fermer la boîte de dialogue
-                cancelButton.addEventListener('click', function() {           
-                    document.getElementById('favDialog').close();
-
-                });
-
-            })();
-        </script>
-
-        {% endblock %}
-
-        <!--
-    {% set check = true %}
-    {% if check %}
-    <a class="btn btn-lg btn-success" href="{{path('inscription')}}" role="button">Get started today</a>
-    {% else %}
-    <a class="btn btn-lg btn-warning" href="#" role="button">Get started tomorrow</a>
-    {% endif %}-->
-{% endblock %}

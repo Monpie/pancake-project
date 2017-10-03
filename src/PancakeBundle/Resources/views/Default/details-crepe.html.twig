@@ -2,16 +2,14 @@
 
 {% block body %}
 
-<a  href="{{path('details-crepe')}}">
-    <img src="/bundles/images/crepe1.jpg"  alt="crêpe 1" title="Crêpe 1"/>
-</a>
-<p>Crêpe numéro 1</p>
-<p>
-    Prix : 4.95€
-</p>
-<form method="get" action="PanierController">
-    <!--<input type="text" name="price" readonly="true" value="4.95">-->
+<img src="{{pancake.image}}"  alt="crêpe 1" title="Crêpe 1"/>
+<p>{{pancake.name}}</p>
+<p>{{pancake.description}}</p>
+<p>{{pancake.price}}</p>
+
+<!--<form method="get" action="PanierController"> 
 <input type="text" name="quantite" value="1">
 <input type="submit" name="send" value="Ajouter au panier">
-</form>
+</form>-->
+
 {% endblock %}
