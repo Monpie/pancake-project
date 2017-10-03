@@ -1,0 +1,14 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+
+<img src="{{pancake.image}}"  alt="crêpe 1" title="Crêpe 1"/>
+<p>{{pancake.name}}</p>
+<p>{{pancake.description}}</p>
+<p>{{pancake.price}}</p>
+
+<!--<form method="get" action="PanierController"> 
+<input type="text" name="quantite" value="1">
+<input type="submit" name="send" value="Ajouter au panier">
+</form>-->
+{% endblock %}

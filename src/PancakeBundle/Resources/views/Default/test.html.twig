@@ -1,0 +1,14 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+<table>
+    <tr>
+                <td>{{ pancake.name }}</td>
+                <td>{{ pancake.price }}</td>
+                <td>{{ pancake.description }}</td>
+                <td>{{ pancake.image }} <img src="{{pancake.image}}"/></td>
+    </tr>
+    
+    
+</table>
+{% endblock %}
