@@ -1,0 +1,34 @@
+
+<dialog id="favDialog" >
+  <form method="dialog">
+    <section>
+      <p><label for="favAnimal">Crêpe 1<p>Détails de la crêpe : sucre, farine, oeufs.</p><p>Prix : 4.95?</p></label>
+    </section>
+    <menu>
+      <button id="cancel" type="reset">Annuler</button>
+      <button type="submit">Ajouter au panier</button>
+    </menu>
+  </form>
+</dialog>
+
+<menu>
+  <button id="updateDetails"><img src="/bundles/images/crepe1.jpg"  alt="crêpe 1" title="Crêpe 1" /></button>
+</menu>
+
+<script>
+  (function() {
+    var updateButton = document.getElementById('updateDetails');
+    var cancelButton = document.getElementById('cancel');
+
+    // Update button opens a modal dialog
+    updateButton.addEventListener('click', function() {
+      document.getElementById('favDialog').showModal();
+    });
+
+    // Bouton pour fermer la boîte de dialogue
+    cancelButton.addEventListener('click', function() {
+      document.getElementById('favDialog').close();
+    });
+
+  })();
+</script>

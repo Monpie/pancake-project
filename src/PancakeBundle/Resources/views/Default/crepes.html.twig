@@ -1,0 +1,190 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+
+{% block entete %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Crêpes à gogo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Catalogue
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a> <!--Modifier le href quand le fichier sera créé -->
+                    <a class="dropdown-item" href="#">Galettes</a> <!--Modifier le href quand le fichier sera créé -->
+                    <a class="dropdown-item" href="#">Pancakes</a> <!--Modifier le href quand le fichier sera créé -->
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Panier</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Connexion
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a> <!--Modifier le href quand le fichier sera créé -->
+                    <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<!--<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #d32f2f">
+<a class="navbar-brand" href="#">Crêpe à gogo</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item active">
+<a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Catalogue</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Contact</a>
+</li>
+
+<li class="dropdown" >
+<div class="btn-group">
+<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #d32f2f;"  >
+Connexion
+</button>
+<div class="dropdown-menu">
+<a class="btn btn-lg " style="background-color: aqua" href="{{path('inscription')}}" role="button">Inscription</a>
+<a class="btn btn-lg btn-success" href="{{path('inscription')}}" role="button">Connexion</a>
+
+</div>
+</div>
+</li>
+</ul>
+
+<form class="form-inline my-2 my-lg-0">
+<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+</div>
+</nav>-->
+
+{% endblock %}
+
+{% block images %}
+<div class="row">
+
+
+    <div class="col-md-6" style="background-color:powderblue;">
+        <a  href="{{path('details-crepe')}}">
+            <img src="/bundles/images/crepe1.jpg"  alt="crêpe 1" title="Crêpe 1"  style="margin-left:13%;"/>
+        </a>
+        <center>
+                <p>Crêpe numéro 1</p>
+            <p>
+                Prix : 4.95€
+            </p>
+        </center>
+    </div>
+
+
+    <div class="col-md-6" style="background-color:yellow;">
+        <a href="{{path('crepes')}}"> <img src="/bundles/images/crepe2.jpg"  alt="crêpe 2"  style="margin-left:13%;"/> 
+        </a>
+        <center>
+                <p>Crêpe numéro 2</p>
+            <p>
+                Prix : 4.95€
+            </p>
+        </center>
+    </div>
+
+
+    <div class="col-md-6">
+        <img src="/bundles/images/crepe3.jpg"  alt="crêpe 3" />
+        <center>
+            <p>Crêpe numéro 3</p>
+            <p>
+                Prix : 4.95€
+            </p>
+    </center>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="/bundles/images/crepe4.jpg" alt="crêpe 4" />
+
+    </div>
+    <div class="col-6">
+        <img src="/bundles/images/crepe5.jpg" alt="crêpe 5" />
+
+    </div>
+    <div class="col-6">
+        <img src="/bundles/images/crepe8.jpg" alt="test-crepes" />
+
+    </div>
+</div>
+
+<p>
+    <!--
+<img src="/bundles/images/crepe1.jpg" alt="crêpe 1" title="Crêpe 1" />
+<img src="/bundles/images/crepe2.jpg" alt="crêpe 2" />
+<img src="/bundles/images/crepe3.jpg" alt="crêpe 3" />
+<img src="/bundles/images/crepe4.jpg" alt="crêpe 4" />
+<img src="/bundles/images/crepe5.jpg" alt="crêpe 5" />
+<img src="/bundles/images/crepe8.jpg" alt="test-crepes" />-->
+</p>
+
+
+<dialog id="favDialog" >
+    <form method="dialog">
+        <section>
+            <p><label for="favAnimal">Crêpe numéro 1
+                <p><img src="/bundles/images/crepe1.jpg" height="100"  alt="crêpe 1" title="Crêpe 1" /></p></label>
+        </section>
+        <menu>
+            <button id="cancel" type="reset">Annuler</button>
+            <button type="submit">Ajouter au panier</button>
+        </menu>
+    </form>
+</dialog>
+
+<menu>
+    <button id="updateDetails" ><img src="/bundles/images/crepe1.jpg" alt="crêpe 1" title="Crêpe 1" /></button>
+</menu>
+
+
+
+{% endblock %}
+
+
+
+<!--
+{% set check = true %}
+{% if check %}
+<a class="btn btn-lg btn-success" href="{{path('inscription')}}" role="button">Get started today</a>
+{% else %}
+<a class="btn btn-lg btn-warning" href="#" role="button">Get started tomorrow</a>
+{% endif %}-->
+{% endblock %}
