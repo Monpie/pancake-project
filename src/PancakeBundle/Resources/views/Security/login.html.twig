@@ -1,0 +1,33 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="well col-4">
+
+      {# S'il y a une erreur, on l'affiche dans un joli cadre #}
+      {% if error %}
+        <div class="alert alert-danger">{{ error.message }}</div>
+      {% endif %}
+
+      {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
+      <form action="{{ path('login_check') }}" method="post" class="form-horizontal">
+        <div class="form-group">
+          <label for="username" class="control-label">Login</label>
+          <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}" />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="control-label">Mot de passe</label>
+          <input type="password" id="password" class="form-control" name="_password" />
+        </div>
+
+        <br/>
+        <input type="submit" class="btn btn-success" value="Connexion" />
+      </form>
+    </div>
+
+    <div class="col"></div>
+  </div>
+{% endblock %}
