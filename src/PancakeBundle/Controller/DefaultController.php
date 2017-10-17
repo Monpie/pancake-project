@@ -84,37 +84,96 @@ class DefaultController extends Controller
      * @Route("/user/edit/{id}", name="editUser", requirements={"id" = "\d+"})
      */
     public function editUserAction($id, Request $request) {
+        $usr = $this->get('security.token_storage')->getToken()->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $user = $em->getRepository('PancakeBundle:User')->find($id);
 
         if (null === $user) {
-          throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
+            throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
+        } elseif ($usr != $user) {
+            return $this->render('PancakeBundle:Default:editUser.html.twig', array('user' => null));
+        } else {
+
+            $form = $this->createFormBuilder($user)
+               ->add('name',      TextType::class)
+               ->add('last_name', TextType::class)
+               ->add('email',     EmailType::class)
+               ->add('phone',     TextType::class)
+               ->add('save',      SubmitType::class, array('label' => 'Modifier le compte'))
+               ->getForm();
+            ;
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+              $em->flush();
+
+              $request->getSession()->getFlashBag()->add('success', 'Utilisateur bien modifié.');
+
+              return $this->redirect($this->generateUrl('showUser', array('id' => $user->getId())));
+            }
+
+            return $this->render('PancakeBundle:Default:editUser.html.twig', array(
+                    'form'   => $form->createView(),
+                    'user' => $user
+                ));
         }
 
-        $form = $this->createFormBuilder($user)
-           ->add('name',      TextType::class)
-           ->add('last_name', TextType::class)
-           ->add('email',     EmailType::class)
-           ->add('phone',     TextType::class)
-           ->add('save',      SubmitType::class, array('label' => 'Modifier le compte'))
-           ->getForm();
-        ;
+      }
 
-        $form->handleRequest($request);
+    /**
+     * @Route("/user/editPwd/{id}", name="editPwd", requirements={"id" = "\d+"})
+     */
+    public function editPasswordAction($id, Request $request) {
+        $usr = $this->get('security.token_storage')->getToken()->getUser();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-          $em->flush();
+        $em = $this->getDoctrine()->getManager();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien modifiée.');
+        $user = $em->getRepository('PancakeBundle:User')->find($id);
 
-          return $this->redirect($this->generateUrl('showUser', array('id' => $user->getId())));
+        if (null === $user) {
+            throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
+        } elseif ($usr != $user) {
+            return $this->render('PancakeBundle:Default:editPassword.html.twig', array('user' => null));
+        } else {
+
+            $form = $this->createFormBuilder($user)
+                ->add('oldPassword',      PasswordType::class, array('mapped' => false))
+                ->add('plainPassword', RepeatedType::class, array(
+                    'type' => PasswordType::class,
+                    'invalid_message' => 'Les champs de mot de passe doivent correspondre',
+                    'options' => array('attr' => array('class' => 'password-field')),
+                    'required' => true,
+                    'first_options'  => array('label' => 'Nouveau mot de passe'),
+                    'second_options' => array('label' => 'Confirmation du nouveau mot de passe')))
+                ->add('save',      SubmitType::class, array('label' => 'Modifier le mot de passe'))
+                ->getForm();
+            ;
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $data = $form->getData();
+                $encoder = $this->container->get('security.password_encoder');
+                $oldPassword = $form->get('oldPassword')->getData();
+
+                if($encoder->isPasswordValid($usr, $oldPassword)) {
+                    $user->setPlainPassword($data->getPlainPassword());
+                    $this->get('fos_user.user_manager')->updateUser($user);
+                    $request->getSession()->getFlashBag()->add('success', 'Mot de passe bien modifié.');
+                    return $this->redirect($this->generateUrl('editUser', array('id' => $user->getId())));
+                } else {
+                    $request->getSession()->getFlashBag()->add('danger', 'Mot de passe incorrecte.');
+                }
+            }
+
+            return $this->render('PancakeBundle:Default:editPassword.html.twig', array(
+                    'form'   => $form->createView(),
+                    'user' => $user
+                ));
         }
-
-        return $this->render('PancakeBundle:Default:editUser.html.twig', array(
-                'form'   => $form->createView(),
-                'user' => $user
-            ));
     }
 
     /**

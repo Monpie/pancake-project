@@ -2,7 +2,4 @@
 
 {% block body %}
 	<h2>{{ user.name }} {{ user.lastName }}</h2>
-	{% if is_granted('ROLE_USER') %}
-		<p>Success !</p>
-	{% endif %}
 {% endblock %}
