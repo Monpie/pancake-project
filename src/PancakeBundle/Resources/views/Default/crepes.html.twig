@@ -1,170 +1,194 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
+
+
+
 {% block body %}
 
-    {% block entete %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Crêpes à gogo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Catalogue
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a> <!--Modifier le href quand le fichier sera créé -->
-                        <a class="dropdown-item" href="#">Galettes</a> <!--Modifier le href quand le fichier sera créé -->
-                        <a class="dropdown-item" href="#">Pancakes</a> <!--Modifier le href quand le fichier sera créé -->
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Panier</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Connexion
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a> <!--Modifier le href quand le fichier sera créé -->
-                        <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+    {# block header #}
+    {% block header %}
+        <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
+    {% endblock %} {# fin block header #}
 
 
-    {% endblock %}
-
-{% block images %}
-<div class="row">
-
-
-
-    <div class="col-md-6" style="background-color:powderblue;">
-        <a  href="{{path('details-crepe')}}">
-            <img src="/bundles/images/crepe1.jpg"  alt="crêpe 1" title="Crêpe 1"  style="margin-left:13%;"/>
-        </a>
-        <center>
-                <p>Crêpe numéro 1</p>
-            <p>
-                Prix : 4.95€
-            </p>
-        </center>
-    </div>
+    {# block navbar #}
+    {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
 
 
-    <div class="col-md-6" style="background-color:yellow;">
-        <a href="{{path('crepes')}}"> <img src="/bundles/images/crepe2.jpg"  alt="crêpe 2"  style="margin-left:13%;"/> 
-        </a>
-        <center>
-                <p>Crêpe numéro 2</p>
-            <p>
-                Prix : 4.95€
-            </p>
-        </center>
-    </div>
+                    <li class="nav-item active" >
+                        <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Catalogue
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
+                            <a class="dropdown-item" href="#pancake-selection">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
+                        </div>
+                    </li>
 
 
-    <div class="col-md-6">
-        <img src="/bundles/images/crepe3.jpg"  alt="crêpe 3" />
-        <center>
-            <p>Crêpe numéro 3</p>
-            <p>
-                Prix : 4.95€
-            </p>
-    </center>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <img src="/bundles/images/crepe4.jpg" alt="crêpe 4" />
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('contact')}}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('panier')}}">Panier</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            Connexion
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a>
+                            <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
+                        </div>
+                    </li>
 
-    </div>
-    <div class="col-6">
-        <img src="/bundles/images/crepe5.jpg" alt="crêpe 5" />
-
-    </div>
-    <div class="col-6">
-<!--
-    <div class="col-4" >
-        {% set params= { 'id': '1'} %}
-        <a  href="{{path('details-crepe',params)}}">
-            {% if pancake.findOneByName('Crêpe 1')==null %}
-            <p>Aucun produit trouvé</p>
-            {% else %}
-            <img src="{{pancake.findOneByName('Crêpe 1').image}}"  alt="crêpe 1" title="Crêpe 1"/>
-        </a>
-            <p>{{pancake.findOneByName('Crêpe 1').name}}</p>
-            <p>{{pancake.findOneByName('Crêpe 1').price}}</p>
-            {% endif %}
-
-    </div>
-    <div class="col-4">
-        <a href="{{path('crepes')}}">
-            {% if pancake.findOneByName('Crêpe 2')==null %}
-            <p>Aucun produit trouvé</p>
-            {% else %}
-            <img src="{{pancake.findOneByName('Crêpe 2').image}}"  alt="crêpe 2" title="Crêpe 2"/>
-            </a>
-            <p>{{pancake.findOneByName('Crêpe 2').name}}</p>
-            <p>{{pancake.findOneByName('Crêpe 2').price}}</p>
-            {% endif %}
-    </div>
-    <div class="col-4">
-        <img src="/bundles/images/crepe3.jpg"  alt="crêpe 3" />
-        <p>Crêpe numéro 3</p>
-        <p>
-            Prix : 4.95€
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-4">
-        <img src="/bundles/images/crepe4.jpg" alt="crêpe 4" />
-
-    </div>
-    <div class="col-4">
-        <img src="/bundles/images/crepe5.jpg" alt="crêpe 5" />
-
-    </div>
-    <div class="col-4">
->>>>>>> 686cdd59a09dd927423b7d0325d478289c366aa8 -->
-        <img src="/bundles/images/crepe8.jpg" alt="test-crepes" />
-
-    </div>
-</div>
+                </ul>
+            </div>
+        </nav>
+    {% endblock %} {# fin block navbar #}
 
 
+    {% block images %} {# block image #}
+
+        
 
 
+    
+        <h1>
+            Carte des crêpes
+        </h1>
+        {# choix des crepes #}
+        <div id="crepe-selection">
+            <div class="w3-container"> {# div W3 container#}
+                {% set cpt=0 %}
+
+                {% for i in crepes %}
+
+                    {% if cpt == 0 %}
+                        <div class="row"> {# div ROW#}
+                    {% endif %}
+
+                    <div class="col-4" id="produit-liste"> {#  div col-4 #}
+                   
+                        {% if i.name==null %}
+                            <p>Aucun produit trouvé</p>
+                        {% else %}
+                            <a  href="{{path('details-crepe',{ 'id': i.id})}}">
+                                <div class="name">
+                                    <h3>{{i.name}}</h3>
+                                </div>
+
+                                <div class="image">
+                                    <img src="{{i.image}}"  alt="crêpe 1" title="Crêpe "  height="200" width="300" />
+                                </div>
+                            </a>
+
+                            {# Description de l'image#}
+                            <a> {{i.description}} </a>
+                            <prix>{{i.price}} €</prix>
+
+                            {# Remise à compteur à 0#}
+                            {% if cpt < 4 %}
+                                {% set cpt = cpt+1 %}
+                            {% endif %}
 
 
+                        {% endif %}
+                </div> {# fin div col-4 #}
+
+                {% if cpt == 3 %}
+                    </div>{# fin div row #}
+                    {% set cpt = 0 %}
+                {% endif %}
 
 
+                {% endfor %}
 
 
-    {% endblock %}
-{% endblock %}
+                {# Cas ou on n'a pas pas plus de 3 articles à la fin #}  
+                {% if cpt != 3  and cpt != 0 %}
+                    </div>{# fin div row #}
+                {% endif %}  
+
+        </div> {# fin div W3 container #}
+
+    </div> {# fin div crepe selection #}
+    
 
 
+        <h1>
+            Carte des pancakes
+        </h1>
+        {# choix des crepes #}
+        <div id="pancake-selection">
+            <div class="w3-container"> {# div W3 container#}
+                {% set cpt=0 %}
+                {% for i in pancakes %}
+                    {% if cpt == 0  %}
+                        <div class="row"> {# div ROW#}
+                    {% endif %}
+
+                    <div class="col-4" id="produit-liste"> {#  div col-4 #}
+                   
+                        {% if i.name==null %}
+                            <p>Aucun produit trouvé</p>
+                        {% else %}
+                            <a  href="{{path('details-crepe',{ 'id': i.id})}}">
+                                <div class="name">
+                                    <h3>{{i.name}}</h3>
+                                </div>
+
+                                
+                                <img src="{{i.image}}"  alt="crêpe 1" title="Pancake"  height="200" width="300" />
+                                
+                            </a>
+
+                            {# Description de l'image#}
+                            <div class="description">
+                                <a> {{i.description}} </a>
+                                <prix>{{i.price}} €</prix>
+                            </div>
+
+                            {# Remise à compteur à 0#}
+                            {% if cpt < 4 %}
+                                {% set cpt = cpt+1 %}
+                            {% endif %}
 
 
+                        {% endif %}
+                </div> {# fin div col-4 #}
+
+                {% if cpt == 3 %}
+                    </div>{# fin div row #}
+                    {% set cpt = 0 %}
+                {% endif %}
+
+
+                {% endfor %}
+
+                {# Cas ou on n'a pas pas plus de 3 articles à la fin #}  
+                {% if cpt != 3  and cpt != 0 %}
+                    <a> cpt fin 2 : </a>
+                    <a> {{cpt}} </a>
+                    </div>{# fin div row #}
+                {% endif %}  
+
+        </div> {# fin div W3 container #}
+
+    </div> {# fin div crepe selection #}
+{% endblock %} {# fin block image #}
+
+        
+
+{% endblock %}{# fin block body #}

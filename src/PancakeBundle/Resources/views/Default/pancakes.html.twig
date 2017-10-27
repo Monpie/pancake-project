@@ -1,8 +1,12 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
+
+
+
 {% block body %}
 
-  {# block header #}
+
+    {# block header #}
     {% block header %}
         <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
     {% endblock %} {# fin block header #}
@@ -55,56 +59,32 @@
     {% endblock %} {# fin block navbar #}
 
 
-  {% block information %} {# block information #}
-    <div class="row" style="margin-left:10%;">
-        <div class="col-md-4 col-md-push-4 about-content">
-            <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
-        </div>
+    {% block images %} {# block image #}
+    <div class="row">
 
-        <div class="panel-heading">
-            <div class="col-md-8 col-md-push-4 about-content">
-                <h2 class="about-title"> Editeur</h2
-                 <p>   Vous êtes actuellement connecté sur le site officiel de Crêpe à GoGo, édité par l'ENSIBS. </p>
-                 </div>
-            </div>
+        {% for i in pancakes %}
+            <div class="col-4">
+             
+            
+                {% if i.name == null %}
+                            <p>Aucun produit trouvé</p>
+                        {% else %}
+                    <a  href="{{path('details-crepe',{ 'id': i.id})}}">
+                <img src="{{i.image}}"  alt="pancake 1" title="Pancake" style="margin-left:13%;" height="200" width="300" />
+            </a>
+                <center>
+                    <p>{{i.name}}</p>
+                    <p>{{i.price}}</p>
+                </center>
+                {% endif %}
+        </div>
+        {% endfor %}
+
+
 
         
-    </div>
+        
 
-    <div class="row" style="margin-left:10%;">
-        <div class="panel-heading">
-            <h3 class="panel-title">Droit d'auteur</h3>
-        </div>
+        {% endblock %} {# fin block image #}
 
-        <div class="panel-body">
-          	Toute reproduction (transfert sur un autre support) des informations ou images du site web est exclusivement limité à l'usage personnel et privé des utilisateurs du réseau internet. 
-        </div>
-    </div>
-
-
-    <div class="row" style="margin-left:10%;">
-        <div class="panel-body">
-          	Toute reproduction ou utilisation de la totalité ou d'une partie substantielle des données du site web est strictement interdite et susceptible de poursuites.
-        </div>
-
-    </div>
-
-    <div class="row" style="margin-left:10%;">
-        <div class="panel-body">
-          	La violation des ces dispositions impératives soumet le contrevenant, et toutes les personnes responsables, aux peines pénales et civiles prévues par la Loi française.
-        </div>
-    </div>
-
-    <div class="row" style="margin-left:10%;">
-        <div class="panel-heading">
-            <h3 class="panel-title">Responsabilité</h3>
-        </div>
-
-        <div class="panel-body">
-          	ENSIBS prend toutes les dispositions pour finir aux internautes un service de qualité et une information fiable, exacte, et exhaustive. Aucune garantié explicite ou implicite n'est néamoins apporté sur ce sujet.
-        </div>
-
-    {% endblock %}
-    </div>
-
-{% endblock %} {# fin block body #}
+{% endblock %}{# fin block body #}
