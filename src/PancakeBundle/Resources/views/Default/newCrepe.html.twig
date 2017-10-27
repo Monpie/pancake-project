@@ -1,7 +1,118 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
+    {# block header #}
+    {% block header %}
+        <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
+    {% endblock %} {# fin block header #}
 
-{{form(form)}}
 
-{% endblock %}
+    {# block navbar #}
+    {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+
+                    <li class="nav-item active" >
+                        <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Catalogue
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
+                            <a class="dropdown-item" href="#">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
+                            <a class="dropdown-item" href="{{path('newCrepe')}}">Ajouter Crêpe</a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('panier')}}">Panier</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Connexion
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a>
+                            <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    {% endblock %} {# fin block navbar #}
+
+    <center>
+        <h2>Créer une crêpe</h2>
+    </center>
+    <div class="row" style="margin-left:40%;">
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+
+
+        {# Gestion du nom de la crêpe #}
+        <div class="form-group">
+            {{ form_label(form.name, "Nom crêpe", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {# Gestion du nom de la crêpe #}
+        <div class="form-group">
+            {{ form_label(form.price, "Prix de la crêpe", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {# Gestion du nom de la crêpe #}
+        <div class="form-group">
+            {{ form_label(form.description, "Description", {'label_attr': {'class': 'control-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.avaibility, "Produit disponible ou non ?", {'label_attr' : {'class':'control-label'}}) }}
+            {{ form_widget(form.avaibility, {'attr' : {'class' : 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.promotion, "Est en promotion ?", {'label_attr' : {'class':'control-label'}}) }}
+            {{ form_widget(form.promotion, {'attr' : {'class' : 'form-control'}}) }}
+        </div>
+
+
+            {{ form_label(form.isPancake, "Est-ce une crêpe ?") }}
+            {{ form_widget(form.isPancake) }}
+
+        <div class="form-group">
+            {{ form_label(form.image, "Image :", {'label_attr' : {'class':'control-label'}}) }}
+            {{ form_widget(form.image, {'attr' : {'class' : 'form-control'}}) }}
+        </div>
+        {% if  form.image == null %}
+            {% for message in app.session.flashbag.get('info') %}
+                {{ message }}
+                {% endfor %}
+            <p>Erreur format de fichier incorrect. Seul les fichiers jpeg et png sont acceptés</p>
+        {% endif %}
+
+        {# Gestion du bouton de création l'article #}
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_end(form) }}
+
+    </div>
+
+    {{form(form)}}
+
+{% endblock %} {# fin block body #}

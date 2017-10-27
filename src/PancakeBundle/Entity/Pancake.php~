@@ -56,6 +56,19 @@ class Pancake
      */
     private $avaibility;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="promotion", type="boolean")
+     */
+    private $promotion;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="pancake", type="boolean")
+     */
+    private $isPancake;
 
     /**
      * Get id
@@ -185,5 +198,56 @@ class Pancake
     public function getAvaibility()
     {
         return $this->avaibility;
+    }
+
+    /**
+     * Set avaibility
+     *
+     * @param boolean $promotion
+     *
+     * @return Pancake
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+
+    /**
+     * Get promotion
+     *
+     * @return bool
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+
+    /**
+     * Set avaibility
+     *
+     * @param boolean $pancake
+     *
+     * @return Pancake
+     */
+    public function setIsPancake($isPancake)
+    {
+        $this->isPancake = $isPancake;
+
+        return $this;
+    }
+
+
+    /**
+     * Get pancake
+     *
+     * @return bool
+     */
+    public function getIsPancake()
+    {
+        return $this->isPancake;
     }
 }
