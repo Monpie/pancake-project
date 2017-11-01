@@ -1,0 +1,25 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+
+{% block images %}
+<div class="row">
+
+    {% for i in pancake %}
+        <div class="col-md-6">
+
+            <a  href="{{path('details-crepe',{ 'id': i.id})}}">
+                {% if i.name==null %}
+                <p>Aucun produit trouvé</p>
+                {% elseif i.isPancake == true %}
+                <img src="{{i.image}}"  alt="{{ i.name }}" title="{{ i.name }} " style="margin-left:8%;" />
+            </a>
+            <center>
+                <p>{{i.name}}</p>
+                <p>{{i.price}}</p>
+            </center>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
+{% endblock %}

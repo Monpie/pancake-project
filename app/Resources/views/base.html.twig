@@ -9,8 +9,11 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        {% block navbar %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
+            <script src="{{ asset('js/jquery.js ') }}"></script>
+            <script src="{{ asset('js/popper.js ') }}"></script>
             <script src="{{ asset('js/bootstrap.js') }}"></script>
         {% endblock %}
     </body>

@@ -1,0 +1,7 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+{% for elem in historique %}
+    <p>utilisateur : {{ elem.user.name }}, date : {{ elem.date.format('Y-m-d H:i:s') }}, quantity : {{ elem.quantity }}, pancake : {{ elem.pancakeArray.name }}</p>
+{% endfor %}
+{% endblock %}
