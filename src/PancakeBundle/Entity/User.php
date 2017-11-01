@@ -26,10 +26,10 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @ORM\Column(name="lastName", type="string", length=255)
      * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
      */
-    private $last_name;
+    private $lastName;
 
 
     /**
@@ -46,20 +46,6 @@ class User extends BaseUser
      * @ORM\Column(name="phone", type="string", length=15, nullable=true)
      */
     private $phone;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="isAdmin", type="boolean")
-     */
-    private $isAdmin = false;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="isStaff", type="boolean")
-     */
-    private $isStaff = false;
 
     /**
      * @Assert\Regex(
@@ -135,54 +121,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set isAdmin
-     *
-     * @param boolean $isAdmin
-     *
-     * @return User
-     */
-    public function setIsAdmin($isAdmin)
-    {
-        $this->isAdmin = $isAdmin;
-
-        return $this;
-    }
-
-    /**
-     * Get isAdmin
-     *
-     * @return bool
-     */
-    public function getIsAdmin()
-    {
-        return $this->isAdmin;
-    }
-
-    /**
-     * Set isStaff
-     *
-     * @param boolean $isStaff
-     *
-     * @return User
-     */
-    public function setIsStaff($isStaff)
-    {
-        $this->isStaff = $isStaff;
-
-        return $this;
-    }
-
-    /**
-     * Get isStaff
-     *
-     * @return bool
-     */
-    public function getIsStaff()
-    {
-        return $this->isStaff;
-    }
-
-    /**
      * Set lastName
      *
      * @param string $lastName
@@ -191,7 +129,7 @@ class User extends BaseUser
      */
     public function setLastName($lastName)
     {
-        $this->last_name = $lastName;
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -203,6 +141,66 @@ class User extends BaseUser
      */
     public function getLastName()
     {
-        return $this->last_name;
+        return $this->lastName;
+    }
+
+    /**
+     * Is the user a staff member ?
+     * 
+     * @return boolean
+     */
+    public function isStaff()
+    {
+        if($this->hasRole("ROLE_STAFF"))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Define the user as staff member
+     *
+     * @param boolean $staff
+     */
+    public function setStaff($staff)
+    {
+        if($staff && !$this->hasRole("ROLE_STAFF"))
+        {
+            $this->addRole("ROLE_STAFF");
+        } else {
+            $this->removeRole("ROLE_STAFF");
+        }
+    }
+
+    /**
+     * Is the user an admin ?
+     * 
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        if($this->hasRole("ROLE_ADMIN"))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Define the user as an admin
+     *
+     * @param boolean $admin
+     */
+    public function setAdmin($admin)
+    {
+        if($admin && !$this->hasRole("ROLE_ADMIN"))
+        {
+            $this->addRole("ROLE_ADMIN");
+        } else {
+            $this->removeRole("ROLE_ADMIN");
+        }
     }
 }

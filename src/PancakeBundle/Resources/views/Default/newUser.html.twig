@@ -45,7 +45,7 @@
             <div class="form-group">
                 {{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'control-label'}}) }}
 
-                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'pattern': '(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$', 'placeholder': 'Entrer un mot de passe'}}) }}
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'pattern': '(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$', 'placeholder': 'Entrer un mot de passe'}}) }}
 
                 <small class="form-text text-muted">Votre mot de passe doit posséder un minimum de 8 caractères avec chiffres, majuscules et minuscules.</small>
             </div>
@@ -53,7 +53,7 @@
             <div class="form-group">
                 {{ form_label(form.plainPassword.second, "Confirmation du mot de passe", {'label_attr': {'class': 'control-label'}}) }}
 
-                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'pattern': '(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$', 'placeholder': 'Confirmer votre mot de passe'}}) }}
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'pattern': '(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$', 'placeholder': 'Confirmer votre mot de passe'}}) }}
             </div>
 
             {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}

@@ -89,10 +89,10 @@ assetic:
     assets:
         bootstrap_js:
             inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.min.js
+                - %kernel.project_dir%/vendor/twitter/bootstrap/dist/js/bootstrap.min.js
             output: js/bootstrap.js 
         bootstrap_css:
             inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.min.css
+                - %kernel.project_dir%/vendor/twitter/bootstrap/dist/css/bootstrap.min.css
             filters: [cssrewrite]
             output: css/bootstrap.css
