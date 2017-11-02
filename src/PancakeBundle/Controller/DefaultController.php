@@ -270,6 +270,18 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/user/showAll",name="showAllUser")
+     */
+    public function showAllUserAction(){
+        $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:User')->findAll();
+        if($em == null){
+            throw new Exception("Aucun utilisateur trouvé !");
+        }
+
+        return $this->render('PancakeBundle:Default:showAllUser.html.twig', array('user' => $em));
+    }
+
+    /**
      * @Route("/user/edit/{id}", name="editUser", requirements={"id" = "\d+"})
      */
     public function editUserAction($id, Request $request) {
