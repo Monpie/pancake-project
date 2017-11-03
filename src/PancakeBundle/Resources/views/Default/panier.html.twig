@@ -16,9 +16,11 @@
             {% endfor %}
 
         {% endfor %}
+        
         {% for message in app.session.flashbag.get('info') %}
             <p>{{ message }}</p>
         {% endfor %}
+
         <p>Prix total du panier : {{ totalPrice }}€</p>
         <form method="get" action="{{ path('valider') }}">
             <input type="submit" name="valider" value="Payer la commande">

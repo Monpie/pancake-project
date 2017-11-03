@@ -2,9 +2,11 @@
 
 namespace PancakeBundle\Controller;
 
-use ClassesWithParents\D;
+
 use PancakeBundle\Entity\Pancake;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use ClassesWithParents\D;
+use PancakeBundle\Entity\Pancakes;
 use Symfony\Component\DependencyInjection\Tests\Compiler\H;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +23,7 @@ class PanierController extends Controller
     private $namePanier;
     private $array;
 
+   
     /**
      * @Route("/panier", name="panier")
      */
@@ -31,29 +34,34 @@ class PanierController extends Controller
             $session->getFlashBag()->add('success', "Session créer avec succès!");
             $articles = 0;
         } else {
+
             $articles = count($session->get('panier'));
         }
 
         $pancake = array();
         $produits = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake');
-        foreach (array_keys($session->get('panier')) as $elem) {
+
+        foreach(array_keys($session->get('panier')) as $elem)
+        {
             $pancake[$elem] = $produits->findOneById($elem);
             //echo $produits->findOneById($elem)->getId();
 
         }
         return $this->render('PancakeBundle:Default:panier.html.twig', array('pancake' => $pancake,
+
             'panier' => $session->get('panier'),
             'totalPrice' => $this->totalPrice($session)));
 
         //return $this->render('PancakeBundle:Default:panier.html.twig',array('panier'=>$session->get('panier')));
         // return $this->render('PancakeBundle:Default:panier.html.twig', array('panier' => $articles));
+
     }
 
     /**
      * @Route("/supprimer/{id}", name="supprimer", requirements={"id"="\d+"})
      */
-    public function removeAction(Session $session, $id)
-    {
+    public function removeAction(Session $session, $id){
+
 
         //$request = Request::createFromGlobals(); // remplace $session = $this->getRequest()->getSession();
 
@@ -63,6 +71,7 @@ class PanierController extends Controller
             unset($panier[$id]);
             $session->set('panier', $panier);
             $session->getFlashBag()->add('success', 'Article supprimé avec succès');
+
         }
 
         return $this->redirect($this->generateUrl('panier'));
@@ -80,9 +89,26 @@ class PanierController extends Controller
              $session = new Session();
              $session->start();*/
             $session->set('panier', array());
+
         }
 
         $panier = $session->get('panier');
+
+
+        if(array_key_exists($id,$panier)){
+            if( $request->query->get('quantity') != null){
+                $panier[$id] +=  $request->query->get('quantity');
+            }
+        } else{
+                if( $request->query->get('quantity') != null){
+                    $panier[$id] =  $request->query->get('quantity');
+                }else{
+                    $panier[$id] = 1;
+                }
+            $session->getFlashBag()->add('success','Article ajouté avec succès');
+        }
+
+        $session->set('panier',$panier);
 
         if (array_key_exists($id, $panier)) {
             if ($request->query->get('quantity') != null) {
@@ -101,9 +127,25 @@ class PanierController extends Controller
         $session->set('panier', $panier);
 
 
+
         //return $this->render('PancakeBundle:Default:panier.html.twig',array('panier'=>$session->get('panier')));
         return $this->redirect($this->generateUrl('panier'));
-    }
+
+      }
+
+
+      public function getDataBdd(Session $session, $id){
+          if(!$session->has('panier'))
+          {
+              /* echo '<p>passage création panier</p>';
+               $session = new Session();
+               $session->start();*/
+              $session->set('panier',array());
+          }
+
+          $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->find($id);
+          $this->render('PancakeBundle:Default:panier.html.twig',array('pancake'=>$pancake));
+      }
 
     /**
      * @Route("/valider", name="valider")
@@ -208,6 +250,7 @@ class PanierController extends Controller
         $this->getDoctrine()->getManager()->persist($historique);
         $this->getDoctrine()->getManager()->flush();
     }
+
 }
 
 ?>

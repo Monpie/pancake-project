@@ -56,19 +56,32 @@ class Pancake
      */
     private $avaibility;
 
+<<<<<<< HEAD
+     /**
+=======
     /**
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * @var bool
      *
      * @ORM\Column(name="promotion", type="boolean")
      */
     private $promotion;
 
+<<<<<<< HEAD
+     /**
+=======
     /**
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * @var bool
      *
      * @ORM\Column(name="pancake", type="boolean")
      */
+<<<<<<< HEAD
+    private $pancake;
+
+=======
     private $isPancake;
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
 
     /**
      * Get id
@@ -200,7 +213,12 @@ class Pancake
         return $this->avaibility;
     }
 
+<<<<<<< HEAD
+
+       /**
+=======
     /**
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Set avaibility
      *
      * @param boolean $promotion
@@ -215,7 +233,11 @@ class Pancake
     }
 
 
+<<<<<<< HEAD
+     /**
+=======
     /**
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Get promotion
      *
      * @return bool
@@ -226,28 +248,48 @@ class Pancake
     }
 
 
+<<<<<<< HEAD
+         /**
+=======
     /**
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Set avaibility
      *
      * @param boolean $pancake
      *
      * @return Pancake
      */
+<<<<<<< HEAD
+    public function setPancake($pancake)
+    {
+        $this->pancake = $pancake;
+=======
     public function setIsPancake($isPancake)
     {
         $this->isPancake = $isPancake;
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
 
         return $this;
     }
 
 
+<<<<<<< HEAD
+     /**
+=======
     /**
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Get pancake
      *
      * @return bool
      */
+<<<<<<< HEAD
+    public function getPancake()
+    {
+        return $this->pancake;
+=======
     public function getIsPancake()
     {
         return $this->isPancake;
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
     }
 }

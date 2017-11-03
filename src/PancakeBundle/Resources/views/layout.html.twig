@@ -16,7 +16,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
-                        <a class="dropdown-item" href="{{ path('pancakes') }}">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
+                        <a class="dropdown-item" href="{{ path('crepes') }}#pancake-selection">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
                         {% if app.user != null and ("ROLE_STAFF" in app.user.roles) %}
                             <a class="dropdown-item" href="{{path('newCrepe')}}">Ajouter Crêpe</a>
                         {% endif %}

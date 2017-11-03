@@ -2,12 +2,18 @@
 
 namespace PancakeBundle\Entity;
 
+<<<<<<< HEAD
+use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+=======
 use PancakeBundle\Entity\Pancake;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use PancakeBundle\Entity\Historique;
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
 
 /**
  * User
@@ -63,6 +69,9 @@ class User extends BaseUser
      * @ORM\Column(name="isStaff", type="boolean")
      */
     private $isStaff = false;
+<<<<<<< HEAD
+    
+=======
 
     /**
      * @ORM\OneToMany(targetEntity="PancakeBundle\Entity\Historique", mappedBy="user" )
@@ -70,6 +79,7 @@ class User extends BaseUser
      */
     private $purchases;
 
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
 
     public function __construct()
     {
@@ -206,6 +216,8 @@ class User extends BaseUser
     {
         return $this->last_name;
     }
+<<<<<<< HEAD
+=======
 
     /**
      * Add purchase
@@ -240,4 +252,5 @@ class User extends BaseUser
     {
         return $this->purchases;
     }
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
 }
