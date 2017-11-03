@@ -2,9 +2,12 @@
 
 namespace PancakeBundle\Entity;
 
+use PancakeBundle\Entity\Pancake;
+
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use PancakeBundle\Entity\Historique;
 
 /**
  * User
@@ -60,7 +63,13 @@ class User extends BaseUser
      * @ORM\Column(name="isStaff", type="boolean")
      */
     private $isStaff = false;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="PancakeBundle\Entity\Historique", mappedBy="user" )
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $purchases;
+
 
     public function __construct()
     {
@@ -196,5 +205,39 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->last_name;
+    }
+
+    /**
+     * Add purchase
+     *
+     * @param \PancakeBundle\Entity\Historique $purchase
+     *
+     * @return User
+     */
+    public function addPurchase(Historique $purchase)
+    {
+        $this->purchases[] = $purchase;
+
+        return $this;
+    }
+
+    /**
+     * Remove purchase
+     *
+     * @param \PancakeBundle\Entity\Historique $purchase
+     */
+    public function removePurchase(Historique $purchase)
+    {
+        $this->purchases->removeElement($purchase);
+    }
+
+    /**
+     * Get purchases
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPurchases()
+    {
+        return $this->purchases;
     }
 }

@@ -3,6 +3,7 @@
 {% block body %}
 
 {% block navbar %}
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="{{path('home')}}">Crêpes à gogo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +47,12 @@
 {% endblock %}
 
 
+=======
+    {{ parent() }}
+{% endblock %}
+
+
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
     {%  if panier == null %}
         <p> Votre panier est vide ! </p>
         <p> Veuillez ajouter un article avant de passer une commande</p>
@@ -61,6 +68,12 @@
             {% endfor %}
 
         {% endfor %}
+<<<<<<< HEAD
+=======
+        {% for message in app.session.flashbag.get('info') %}
+            <p>{{ message }}</p>
+        {% endfor %}
+>>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
         <p>Prix total du panier : {{ totalPrice }}€</p>
         <form method="get" action="{{ path('valider') }}">
             <input type="submit" name="valider" value="Payer la commande">

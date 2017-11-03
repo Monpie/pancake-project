@@ -1,20 +1,18 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
-
-
-
 {% block body %}
 
 
-    {# block header #}
+  {# block header #}
     {% block header %}
         <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
     {% endblock %} {# fin block header #}
 
 
+
     {# block navbar #}
     {% block navbar %}
-<<<<<<< HEAD
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -57,46 +55,44 @@
                 </ul>
             </div>
         </nav>
-=======
-       {{ parent() }}
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
+
     {% endblock %} {# fin block navbar #}
 
 
-    {% block images %} {# block image #}
-    <div class="row">
+  {% block information %} {# block information #}
+    <div class="presentation-image">
+        <a><img class="d-block " src="/bundles/images/champsBle.jpg" width="" alt="First slide"> </a>
+        <p> Utilisation de farine bio </p>
+    </div>
+  {% endblock %}{# fin block information #}
 
-        {% for i in pancakes %}
-<<<<<<< HEAD
-            <div class="col-4">
-             
-            
-                {% if i.name == null %}
-                            <p>Aucun produit trouvé</p>
-                        {% else %}
-                    <a  href="{{path('details-crepe',{ 'id': i.id})}}">
-                <img src="{{i.image}}"  alt="pancake 1" title="Pancake" style="margin-left:13%;" height="200" width="300" />
-=======
-            <div class="col-md-6">
-             
-            <a  href="{{path('details-crepe',{ 'id': i.id})}}">
-                {% if i.isPancake == true %}
-                <img src="{{i.image}}"  alt="pancake 1" title="Pancake" style="margin-left:13%;" />
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
-            </a>
-                <center>
-                    <p>{{i.name}}</p>
-                    <p>{{i.price}}</p>
-                </center>
-                {% endif %}
+
+{# BAS DE PAGE #}   
+
+<div class="footer">
+
+    <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
+                
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="#">Contact Us</a>&nbsp
+            <a class="link" href="#">Privacy Policy</a>&nbsp
+            <a class="link" href="#">Terms & Conditions</a>
+
+            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
+
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
+            </p>
         </div>
-        {% endfor %}
 
+    
+</div>
 
-
-        
-        
-
-        {% endblock %} {# fin block image #}
-
-{% endblock %}{# fin block body #}
+{% endblock %} {# fin block body #}

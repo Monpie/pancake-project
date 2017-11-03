@@ -4,7 +4,10 @@ namespace PancakeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use PancakeBundle\Entity\Pancake;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,6 +16,14 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
+
+use PancakeBundle\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Security\Core\SecurityContext;
+
+
 class DefaultController extends Controller
 {
     /**
@@ -20,13 +31,29 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+
         $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
         
         if(!$pancake){
             throw $this->createNotFoundException('Aucun produit trouvé');
         }
         
-        return $this->render('PancakeBundle:Default:index.html.twig', array('pancake' => $pancake));
+        return $this->render('PancakeBundle:Default:index.html.twig', array('pancake' => $pancake, 'userConnected' => $this->getUser()));
+    }
+
+     /**
+     * @Route("/presentation",name="presentation")
+     */
+    public function presentationAction()
+    {
+
+        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
+        
+        if(!$pancake){
+            throw $this->createNotFoundException('Aucun produit trouvé');
+        }
+        
+        return $this->render('PancakeBundle:Default:presentation.html.twig', array('pancake' => $pancake, 'userConnected' => $this->getUser()));
     }
     
     /**
@@ -42,25 +69,40 @@ class DefaultController extends Controller
             ->add('image', FileType::class)
             ->add('avaibility', CheckboxType::class)
             ->add('pancake', CheckboxType::class)
+
+            ->add('promotion', CheckboxType::class)
+            ->add('isPancake', CheckboxType::class)
+
             ->add('save', SubmitType::class, array('label'=>'Créer l\'article'))
             ->getForm();
         
         $form->handleRequest($request);
-        if($form->isSubmitted()&&$form->isValid()){
+        if($form->isSubmitted()&&$form->isValid()) {
             /*Permet d'ajouter le fichier uploader dans le repertoire ci-dessous*/
             $dir = "/bundles/images/";
+
             $totalDir = "C:\xammp\htdocs\pancake-project\web".$dir;
+
+            $totalDir = "C:\xammp\htdocs\pancake-project\web" . $dir;
+
             $file = $form['image']->getData();
-            $file->move($totalDir, $file->getClientOriginalName());
-            
-            $pancake->setImage($dir.$file->getClientOriginalName());
-            
-            $pancake = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($pancake);
-            $em->flush();
+
+            if (strcmp($file->guessExtension(), "jpeg") == 0 || strcmp($file->guessExtension(),"png") == 0) {
+                $file->move($totalDir, $file->getClientOriginalName());
+                $pancake->setImage($dir . $file->getClientOriginalName());
+
+                $pancake = $form->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($pancake);
+                $em->flush();
+            } else {
+                $this->get('session')->getFlashBag()->add('info','Erreur format fichier');
+                echo 'Format fichier invalide';
+                $pancake->setImage(null);
+                return $this->render('PancakeBundle:Default:newCrepe.html.twig', array('form' => $form->createView()));
+
+            }
         }
-        
         return $this->render('PancakeBundle:Default:newCrepe.html.twig', array('form'=>$form->createView()));
     }
     
@@ -82,20 +124,28 @@ class DefaultController extends Controller
     /**
     * @Route("/details-crepe/{id}",name="details-crepe", requirements={"id"="\d+"})
     */
-    public function detailsCrepeAction($id){
+    public function detailsCrepeAction($id ){
         $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->find($id);
-        
+
         if(!$pancake){
             throw $this->createNotFoundException('Aucun produit trouvé pour l\'identifiant : '+$id);
         }
-        
+
         return $this->render('PancakeBundle:Default:details-crepe.html.twig', array('pancake' => $pancake));
+    }
+
+    /**
+     * @Route("/panier", name="panier")
+     */
+    public function panierAction(){
+        return $this->render('PancakeBundle:Default:panier.html.twig');
     }
     
     /**
     * @Route("/crepes",name="crepes")
     */
     public function pageCrepesAction(){
+
         $em = $this->getDoctrine()->getManager();
         $crepes = $em->getRepository('PancakeBundle:Pancake')->findByPancake(false);
         $pancakes = $em->getRepository('PancakeBundle:Pancake')->findByPancake(true);
@@ -116,6 +166,7 @@ class DefaultController extends Controller
     * @Route("/pancakes",name="pancakes")
     */
     public function pagePancakesAction(){
+
         $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
         
         if(!$pancake){
@@ -126,25 +177,74 @@ class DefaultController extends Controller
     }
 
 
-    
     /**
-    * @Route("/panier",name="panier")
+    * @Route("/test",name="test")
     */
-    public function panierAction(){
-        return $this->render('PancakeBundle:Default:panier.html.twig');
+    public function showPancake(Request $request){
+      /*  $panier = new Panier();
+        $form = $this->createFormBuilder($panier)->add('quantity', TextType::class)->add('submit',SubmitType::class)->getForm();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $panier = $form->getData();
+            return $this->render('PancakeBundle:Default:panier.html.twig', array('panier'=>$panier));
+            //return $this->redirectToRoute("panier", array('panier'=>$panier));
+        }
+        return $this->render('PancakeBundle:Default:test.html.twig', array('form'=> $form->createView()));*/
+
+
+        return $this->render('PancakeBundle:Default:test.html.twig', array('pancake' => $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll()));
+    }
+
+
+    /**
+     * @Route("/test/{id}", name="editPancake")
+     */
+    public function editPancakeAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $pancake = $em->getRepository('PancakeBundle:Pancake')->find($id);
+        $request = Request::createFromGlobals();
+
+        if($request->query->get('pancakeName'.$id)!= null) {
+            $pancake->setName($request->query->get('pancakeName' . $id));
+        }
+
+        if($request->query->get('pancakePrice'.$id) != null) {
+            $pancake->setPrice($request->query->get('pancakePrice' . $id));
+        }
+
+        if($request->query->get('pancakeDescription'.$id)!= null) {
+            $pancake->setDescription($request->query->get('pancakeDescription' . $id));
+        }
+
+        if($request->query->get('pancakeAvailability'.$id)!= null) {
+            $pancake->setAvaibility($request->query->get('pancakeAvailability' . $id));
+        }
+
+        if($request->query->get('pancakeImage'.$id)!= null) {
+            $pancake->setImage($request->query->get('pancakeImage' . $id));
+        }
+
+
+
+        $em->flush();
+        return $this->redirect($this->generateUrl('test'));
     }
 
     /**
-    * @Route("/test/{id}",name="test", requirements={"id"="\d+"})
-    */
-    public function showPancake($id){
+     * @Route("/test/{id}", name="removePancake", requirements={"id"="\d+"})
+     */
+    public function removePancakeAction($id){
         $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->find($id);
-        
-        if(!$pancake){
-            throw $this->createNotFoundException('Aucun produit trouvé pour l\'identifiant : '+$id);
+        $em = $this->getDoctrine()->getManager();
+        foreach($this->getUser()->getPurchases() as $elem){
+            if($elem->getPancakeArray() == $pancake ){
+                $em->remove($elem);
+            }
         }
-        
-        return $this->render('PancakeBundle:Default:test.html.twig', array('pancake' => $pancake));
+        $this->getDoctrine()->getManager()->remove($pancake);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirect($this->generateUrl('test'));
     }
 
     /**
@@ -269,4 +369,6 @@ class DefaultController extends Controller
         return $this->render('PancakeBundle:Default:newUser.html.twig', array('form' => $form->createView(),
         ));
     }
+
+
 }

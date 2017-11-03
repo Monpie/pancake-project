@@ -6,6 +6,7 @@
 {% block body %}
 
 
+
     {# block header #}
     {% block header %}
         <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
@@ -61,8 +62,7 @@
 
     {% block images %} {# block image #}
 
-        
-
+ 
 
     
         <h1>
@@ -95,9 +95,12 @@
                             </a>
 
                             {# Description de l'image#}
-                            <a> {{i.description}} </a>
-                            <prix>{{i.price}} €</prix>
-
+                            <div class="description">
+                                <a  href="{{path('details-crepe',{ 'id': i.id})}}">
+                                    En savoir plus
+                                </a>
+                                <prix>{{i.price}} €</prix>
+                            </div>
                             {# Remise à compteur à 0#}
                             {% if cpt < 4 %}
                                 {% set cpt = cpt+1 %}
@@ -156,7 +159,9 @@
 
                             {# Description de l'image#}
                             <div class="description">
-                                <a> {{i.description}} </a>
+                                <a  href="{{path('details-crepe',{ 'id': i.id})}}">
+                                    En savoir plus
+                                </a>
                                 <prix>{{i.price}} €</prix>
                             </div>
 
@@ -189,6 +194,35 @@
     </div> {# fin div crepe selection #}
 {% endblock %} {# fin block image #}
 
-        
+   
+{# BAS DE PAGE #}   
 
+<div class="footer">
+
+    <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
+                
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="#">Contact Us</a>&nbsp
+            <a class="link" href="#">Privacy Policy</a>&nbsp
+            <a class="link" href="#">Terms & Conditions</a>
+
+            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
+
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
+            </p>
+        </div>
+
+    
+</div>
 {% endblock %}{# fin block body #}
+
+
+

@@ -2,17 +2,122 @@
 
 {% block body %}
 
-<img src="{{pancake.image}}"  alt="{{ pancake.name }}" title="{{ pancake.name }}"/>
-<p>Nom de la crêpe : {{pancake.name}}</p>
-<p>Description de la crêpe : {{pancake.description}}</p>
-<p>Prix de la crêpe : {{pancake.price}}</p>
 
-<form method="get" action="{{ path('ajouter', {'id' : pancake.id}) }}">
-    <select name="quantity" class="span1">
-        {%  for i in 1..10 %}
-            <option value="{{ i }}">{{ i }}</option>
-        {%  endfor %}
-    </select>
-    <input type="submit"  name="send" value="Ajouter au panier">
-</form>
-{% endblock %}
+{# block header #}
+    {% block header %}
+        <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
+    {% endblock %} {# fin block header #}
+
+
+    {# block navbar #}
+    {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+
+                    <li class="nav-item active" >
+                        <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Catalogue
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
+                            <a class="dropdown-item" href="#pancake-selection">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('contact')}}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('panier')}}">Panier</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            Connexion
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a>
+                            <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    {% endblock %} {# fin block navbar #}
+
+
+
+{# Affichage détail de la crêpe #}
+<br> </br>
+
+
+<div id="affichage-crepe">
+	<div class="w3-container"> {# div W3 container#}
+		<div class="row"> {# div ROW#}
+			<div class="col-6" id="image-crepe"> {# div col4#}
+				<img src="{{pancake.image}}"  alt="{{ pancake.name }}" title="{{ pancake.name }}" height="400" width="500"/>
+			</div> {# FIN div col4#}
+
+			<div class="col-4" id="information-crepe"> {# div col8#}
+				<h1>{{pancake.name}}</h1>
+				<description>{{pancake.description}}</description></br>
+
+				<prix>{{pancake.price}} €</prix>
+
+				<hr class="dark-line">
+
+				<form method="get" action="{{ path('ajouter', {'id' : pancake.id}) }}">
+				    <select  class="container" name="quantity">
+				        {%  for i in 1..5 %}
+				            <option value="{{ i }}">{{ i }}</option>
+				        {%  endfor %}
+				    </select>
+				    <input type="submit"  name="send" value="Ajouter au panier">
+				</form>
+			</div> {# FIN div col8#}
+		</div> {# FIN div ROW#}
+	</div>{# FIN div W3 container#}
+</div> {# FIN Affichage détail de la crêpe #}
+
+
+
+
+{# BAS DE PAGE #}   
+
+<div class="footer">
+
+    <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
+                
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="#">Contact Us</a>&nbsp
+            <a class="link" href="#">Privacy Policy</a>&nbsp
+            <a class="link" href="#">Terms & Conditions</a>
+
+            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
+
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
+            </p>
+        </div>
+
+    
+</div>
+
+{% endblock %} {# fin block body #}

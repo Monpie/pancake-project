@@ -56,12 +56,14 @@ class Pancake
      */
     private $avaibility;
 
+
      /**
      * @var bool
      *
      * @ORM\Column(name="promotion", type="boolean")
      */
     private $promotion;
+
 
      /**
      * @var bool
@@ -70,6 +72,8 @@ class Pancake
      */
     private $pancake;
 
+
+    
 
     /**
      * Get id
@@ -202,7 +206,10 @@ class Pancake
     }
 
 
-       /**
+
+       
+
+    /**
      * Set avaibility
      *
      * @param boolean $promotion
@@ -217,7 +224,7 @@ class Pancake
     }
 
 
-     /**
+    /**
      * Get promotion
      *
      * @return bool
@@ -228,7 +235,9 @@ class Pancake
     }
 
 
-         /**
+
+
+    /**
      * Set avaibility
      *
      * @param boolean $pancake
@@ -238,12 +247,14 @@ class Pancake
     public function setPancake($pancake)
     {
         $this->pancake = $pancake;
-
-        return $this;
     }
 
+   
 
-     /**
+
+
+
+    /**
      * Get pancake
      *
      * @return bool
@@ -252,4 +263,5 @@ class Pancake
     {
         return $this->pancake;
     }
+
 }
