@@ -1,11 +1,6 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
-
-    {% block navbar %}
-        {{ parent() }}
-        {% endblock %}
-
 <img src="{{pancake.image}}"  alt="{{ pancake.name }}" title="{{ pancake.name }}"/>
 <p>Nom de la crêpe : {{pancake.name}}</p>
 <p>Description de la crêpe : {{pancake.description}}</p>

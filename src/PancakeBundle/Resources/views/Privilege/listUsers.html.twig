@@ -1,0 +1,53 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+	<h1>Liste des utilisateurs du site</h1>
+	<div class="row">
+		<div class="col"></div>
+
+		<div class="col-8">
+			<table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Prénom</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Employé.e</th>
+                      <th scope="col">Admin</th>
+                      <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% set i = 0 %}
+                {% for u in users %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                        {% set i = i + 1 %}
+                        <td>{{ u.lastName }}</td>
+                        <td>{{ u.name }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>
+                            {% if "ROLE_STAFF" in u.roles %}
+                                <p>Oui</p>
+                            {% else %}
+                                <p>Non</p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if "ROLE_ADMIN" in u.roles %}
+                                <p>Oui</p>
+                            {% else %}
+                                <p>Non</p>
+                            {% endif %}
+                        </td>
+                        <td><a type="button" class="btn btn-dark" href="{{ path('editAdminUser', {'id' : u.id}) }}">Modifier</a>
+                    </tr>
+                {% endfor %}
+                </tbody>
+			</table>
+		</div>
+
+		<div class="col"></div>
+	</div>
+{% endblock %}

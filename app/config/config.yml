@@ -78,3 +78,30 @@ fos_user:
     from_email:
         address: "noreply@crepeagogo.fr"
         sender_name: "Service Crêpe à Gogo"
+
+# Bootstrap
+assetic:
+    debug: "%kernel.debug%"
+    use_controller: false
+    bundles: []
+
+    filters:
+        cssrewrite: ~
+    assets:
+        bootstrap_js:
+            inputs:
+                - %kernel.project_dir%/vendor/twitter/bootstrap/dist/js/bootstrap.min.js
+            output: js/bootstrap.js 
+        bootstrap_popper:
+            inputs:
+                - %kernel.project_dir%/vendor/twitter/bootstrap/assets/js/vendor/popper.min.js
+            output: js/popper.js 
+        bootstrap_jquery:
+            inputs:
+                - %kernel.project_dir%/vendor/twitter/bootstrap/assets/js/vendor/jquery-slim.min.js
+            output: js/jquery.js 
+        bootstrap_css:
+            inputs:
+                - %kernel.project_dir%/vendor/twitter/bootstrap/dist/css/bootstrap.min.css
+            filters: [cssrewrite]
+            output: css/bootstrap.css

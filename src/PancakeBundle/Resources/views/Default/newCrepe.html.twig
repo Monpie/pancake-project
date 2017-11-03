@@ -1,59 +1,6 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
-    {# block header #}
-    {% block header %}
-        <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
-    {% endblock %} {# fin block header #}
-
-
-    {# block navbar #}
-    {% block navbar %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-
-
-                    <li class="nav-item active" >
-                        <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Catalogue
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
-                            <a class="dropdown-item" href="#">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
-                            <a class="dropdown-item" href="{{path('newCrepe')}}">Ajouter Crêpe</a>
-                        </div>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('panier')}}">Panier</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Connexion
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a>
-                            <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-    {% endblock %} {# fin block navbar #}
-
     <center>
         <h2>Créer une crêpe</h2>
     </center>
@@ -82,19 +29,26 @@
             {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
         </div>
 
-        <div class="form-group">
-            {{ form_label(form.avaibility, "Produit disponible ou non ?", {'label_attr' : {'class':'control-label'}}) }}
-            {{ form_widget(form.avaibility, {'attr' : {'class' : 'form-control'}}) }}
+        <div class="form-check">
+            <label class="form-check-label">
+                {{ form_widget(form.avaibility, {'attr': {'class': 'form-check-input' }}) }}
+                Produit disponible ?
+            </label>
         </div>
 
-        <div class="form-group">
-            {{ form_label(form.promotion, "Est en promotion ?", {'label_attr' : {'class':'control-label'}}) }}
-            {{ form_widget(form.promotion, {'attr' : {'class' : 'form-control'}}) }}
+        <div class="form-check">
+            <label class="form-check-label">
+                {{ form_widget(form.promotion, {'attr': {'class': 'form-check-input' }}) }}
+                En vitrine ?
+            </label>
         </div>
 
-
-            {{ form_label(form.isPancake, "Est-ce une crêpe ?") }}
-            {{ form_widget(form.isPancake) }}
+        <div class="form-check">
+            <label class="form-check-label">
+                {{ form_widget(form.isPancake, {'attr': {'class': 'form-check-input' }}) }}
+                Est-ce une crêpe ? (non = pancake)
+            </label>
+        </div>
 
         <div class="form-group">
             {{ form_label(form.image, "Image :", {'label_attr' : {'class':'control-label'}}) }}

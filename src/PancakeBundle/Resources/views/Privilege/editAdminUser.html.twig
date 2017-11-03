@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col"></div>
 
-        {% if user == null %}
+        {% if not ("ROLE_ADMIN" in connectedUser.roles) %}
             <div class="col-8">
                 <p class="alert alert-danger" role="alert">Vous n'avez pas le droit d'accès à cette page</p>
             </div>
@@ -47,9 +47,23 @@
                     {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'pattern': '^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$', 'placeholder': 'Numéro de téléphone'}}) }}
                 </div>
 
-                <a type="button" class="btn btn-secondary" href="{{ path('editPwd', {'id' : user.id}) }}">Changer de mot de passe</a>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        {{ form_widget(form.staff, {'attr': {'class': 'form-check-input' }}) }}
+                        Employé.e
+                    </label>
+                </div>
 
-                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        {{ form_widget(form.admin, {'attr': {'class': 'form-check-input' }}) }}
+                        Admin
+                    </label>
+                </div>
+
+                <a type="button" class="btn btn-danger" href="{{ path('editAdminUserPwd', {'id' : user.id}) }}">Changer de mot de passe</a>
+
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-warning'}}) }}
 
                 {{ form_end(form) }}
             </div>

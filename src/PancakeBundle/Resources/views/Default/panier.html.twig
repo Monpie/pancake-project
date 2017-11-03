@@ -1,12 +1,6 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
-
-{% block navbar %}
-    {{ parent() }}
-{% endblock %}
-
-
     {%  if panier == null %}
         <p> Votre panier est vide ! </p>
         <p> Veuillez ajouter un article avant de passer une commande</p>
