@@ -72,7 +72,6 @@ class DefaultController extends Controller
             ->add('avaibility', CheckboxType::class, ['required' => false])
             ->add('pancake', CheckboxType::class, ['required' => false])
             ->add('promotion', CheckboxType::class, ['required' => false])
-            ->add('isPancake', CheckboxType::class, ['required' => false])
             ->add('save', SubmitType::class, array('label'=>'Créer l\'article'))
             ->getForm();
         
