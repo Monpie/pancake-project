@@ -29,7 +29,7 @@ class Pancake
     private $name;
 
     /**
-     * @var int
+     * @var decimal
      *
      * @ORM\Column(name="price", type="decimal", scale=2)
      */
@@ -56,22 +56,26 @@ class Pancake
      */
     private $avaibility;
 
-
-     /**
+    /**
      * @var bool
      *
      * @ORM\Column(name="promotion", type="boolean")
      */
     private $promotion;
 
-
-     /**
+    /**
      * @var bool
      *
      * @ORM\Column(name="pancake", type="boolean")
      */
     private $pancake;
 
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="rate", type="decimal", scale=2)
+     */
+    private $rate;
 
     
 
@@ -203,11 +207,7 @@ class Pancake
     public function getAvaibility()
     {
         return $this->avaibility;
-    }
-
-
-
-       
+    }       
 
     /**
      * Set avaibility
@@ -223,7 +223,6 @@ class Pancake
         return $this;
     }
 
-
     /**
      * Get promotion
      *
@@ -233,9 +232,6 @@ class Pancake
     {
         return $this->promotion;
     }
-
-
-
 
     /**
      * Set avaibility
@@ -249,11 +245,6 @@ class Pancake
         $this->pancake = $pancake;
     }
 
-   
-
-
-
-
     /**
      * Get pancake
      *
@@ -264,4 +255,28 @@ class Pancake
         return $this->pancake;
     }
 
+
+    /**
+     * Set rate
+     *
+     * @param integer $rate
+     *
+     * @return Pancake
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return integer
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
 }

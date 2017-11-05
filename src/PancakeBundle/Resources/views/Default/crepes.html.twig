@@ -39,7 +39,13 @@
                                 <a  href="{{path('details-crepe',{ 'id': i.id})}}">
                                     En savoir plus
                                 </a>
-                                <prix>{{i.price}} €</prix>
+                                <prix>{{ (i.price * (1- i.rate))|number_format(2) }} €</prix>
+                                {% if i.rate > 0 %}
+                                    <p class="alert alert-info">-{{ i.rate * 100 }}%</p>
+                                {% endif %}
+                                {% if app.user != null and ("ROLE_STAFF" in app.user.roles) %}
+                                    <a class="btn btn-warning" href="{{path('editPancake', {'id': i.id})}}">Modifier</a>
+                                {% endif %}
                             </div>
                             {# Remise à compteur à 0#}
                             {% if cpt < 4 %}

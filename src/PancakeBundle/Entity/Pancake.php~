@@ -29,7 +29,7 @@ class Pancake
     private $name;
 
     /**
-     * @var int
+     * @var decimal
      *
      * @ORM\Column(name="price", type="decimal", scale=2)
      */
@@ -56,32 +56,28 @@ class Pancake
      */
     private $avaibility;
 
-<<<<<<< HEAD
-     /**
-=======
     /**
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * @var bool
      *
      * @ORM\Column(name="promotion", type="boolean")
      */
     private $promotion;
 
-<<<<<<< HEAD
-     /**
-=======
     /**
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * @var bool
      *
      * @ORM\Column(name="pancake", type="boolean")
      */
-<<<<<<< HEAD
     private $pancake;
 
-=======
-    private $isPancake;
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="rate", type="decimal", scale=2)
+     */
+    private $rate;
+
+    
 
     /**
      * Get id
@@ -211,14 +207,9 @@ class Pancake
     public function getAvaibility()
     {
         return $this->avaibility;
-    }
+    }       
 
-<<<<<<< HEAD
-
-       /**
-=======
     /**
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Set avaibility
      *
      * @param boolean $promotion
@@ -232,12 +223,7 @@ class Pancake
         return $this;
     }
 
-
-<<<<<<< HEAD
-     /**
-=======
     /**
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Get promotion
      *
      * @return bool
@@ -247,49 +233,50 @@ class Pancake
         return $this->promotion;
     }
 
-
-<<<<<<< HEAD
-         /**
-=======
     /**
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Set avaibility
      *
      * @param boolean $pancake
      *
      * @return Pancake
      */
-<<<<<<< HEAD
     public function setPancake($pancake)
     {
         $this->pancake = $pancake;
-=======
-    public function setIsPancake($isPancake)
-    {
-        $this->isPancake = $isPancake;
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
-
-        return $this;
     }
 
-
-<<<<<<< HEAD
-     /**
-=======
     /**
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
      * Get pancake
      *
      * @return bool
      */
-<<<<<<< HEAD
     public function getPancake()
     {
         return $this->pancake;
-=======
-    public function getIsPancake()
+    }
+
+
+    /**
+     * Set rate
+     *
+     * @param integer $rate
+     *
+     * @return Pancake
+     */
+    public function setRate($rate)
     {
-        return $this->isPancake;
->>>>>>> 1b0be506d8d3fffb9d47142af2999a9b0fed6906
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return integer
+     */
+    public function getRate()
+    {
+        return $this->rate;
     }
 }
