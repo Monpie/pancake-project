@@ -16,9 +16,16 @@
 			<div class="col-4" id="information-crepe"> {# div col8#}
 				<h1>{{pancake.name}}</h1>
 				<description>{{pancake.description}}</description></br>
+				{% if pancake.promotion == true %}
+					<del>
+						<prixBare>{{pancake.price}} €</prixBare>
+					</del>
 
-				<prix>{{pancake.price}} €</prix>
-
+					<br></br>
+					<prixPromotion>{{pancake.price}} €</prixPromotion>
+				{% else %}
+					<prix>{{pancake.price}} €</prix>
+				{% endif %}
 				<hr class="dark-line">
 
 				<form method="get" action="{{ path('ajouter', {'id' : pancake.id}) }}">
