@@ -22,10 +22,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('contact') }}">Contact</a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="{{path('panier')}}">Panier</a>
                 </li>
                 {% if  app.user != null %}
@@ -65,11 +61,8 @@
 
             </p>
             <hr class="dark-line">
-            <a class="link" href="{{ path('contact') }}">Contact Us</a>
-            <a class="link" href="{{ path('contact') }}">Privacy Policy</a>
-            <a class="link" href="{{ path('contact') }}">Terms & Conditions</a>
-
-
+            <a class="link" href="{{ path('messagerie') }}">Contact</a>
+            <a class="link" href="{{ path('contact') }}">Informations légales</a>
 
             <br><br>
             <p class="white-txt small">

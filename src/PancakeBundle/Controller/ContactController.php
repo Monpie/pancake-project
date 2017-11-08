@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 class ContactController extends Controller
 {
 	/**
-     * @Route("/contact", name="contact")
+     * @Route("/messagerie", name="messagerie")
      */
 	public function contactAction(Request $request){
 		$enquiry = new Enquiry();
@@ -44,7 +44,7 @@ class ContactController extends Controller
         		->getFlashBag()
         		->add('success', 'Message envoyé. Merci');
         		
-				return $this->redirect($this->generateUrl('contact'));
+				return $this->redirect($this->generateUrl('messagerie'));
 			}
 		}
 

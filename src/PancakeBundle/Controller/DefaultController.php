@@ -66,7 +66,7 @@ class DefaultController extends Controller
         
         $form = $this->createFormBuilder($pancake)
             ->add('name', TextType::class)
-            ->add('price', DecimalType::class)
+            ->add('price', TextType::class)
             ->add('description', TextareaType::class)
             ->add('image', FileType::class)
             ->add('rate', PercentType::class)
@@ -325,8 +325,6 @@ class DefaultController extends Controller
               $em->flush();
 
               $request->getSession()->getFlashBag()->add('success', 'Utilisateur bien modifié.');
-
-              return $this->redirect($this->generateUrl('showUser', array('id' => $user->getId())));
             }
 
             return $this->render('PancakeBundle:Default:editUser.html.twig', array(
@@ -450,7 +448,7 @@ class DefaultController extends Controller
             
             return $this->redirectToRoute('home');
         }
-        return $this->render('PancakeBundle:Default:index.html.twig', array('form' => $form->createView(),
+        return $this->render('PancakeBundle:Default:newUser.html.twig', array('form' => $form->createView(),
         ));
     }
 

@@ -16,13 +16,13 @@
 			<div class="col-4" id="information-crepe"> {# div col8#}
 				<h1>{{pancake.name}}</h1>
 				<description>{{pancake.description}}</description></br>
-				{% if pancake.promotion == true %}
+				{% if pancake.rate > 0 %}
 					<del>
 						<prixBare>{{pancake.price}} €</prixBare>
 					</del>
 
 					<br></br>
-					<prixPromotion>{{pancake.price}} €</prixPromotion>
+					<prixPromotion>{{ (pancake.price * (1- pancake.rate))|number_format(2) }} €</prixPromotion>
 				{% else %}
 					<prix>{{pancake.price}} €</prix>
 				{% endif %}
