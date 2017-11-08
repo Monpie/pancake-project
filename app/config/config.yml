@@ -105,3 +105,7 @@ assetic:
                 - %kernel.project_dir%/vendor/twitter/bootstrap/dist/css/bootstrap.min.css
             filters: [cssrewrite]
             output: css/bootstrap.css
+        crepe_css:
+            inputs:
+                - %kernel.project_dir%/src/PancakeBundle/Resources/css/crepe.css
+            output: css/crepe.css

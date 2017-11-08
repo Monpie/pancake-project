@@ -38,6 +38,21 @@ class DefaultController extends Controller
         
         return $this->render('PancakeBundle:Default:index.html.twig', array('pancake' => $pancake, 'userConnected' => $this->getUser()));
     }
+
+     /**
+     * @Route("/presentation",name="presentation")
+     */
+    public function presentationAction()
+    {
+
+        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
+        
+        if(!$pancake){
+            throw $this->createNotFoundException('Aucun produit trouvé');
+        }
+        
+        return $this->render('PancakeBundle:Default:presentation.html.twig', array('pancake' => $pancake, 'userConnected' => $this->getUser()));
+    }
     
     /**
     * @Route("/crepe/new",name="newCrepe")
@@ -53,7 +68,7 @@ class DefaultController extends Controller
             ->add('image', FileType::class)
             ->add('avaibility', CheckboxType::class, ['required' => false])
             ->add('promotion', CheckboxType::class, ['required' => false])
-            ->add('isPancake', CheckboxType::class, ['required' => false])
+            ->add('pancake', CheckboxType::class, ['required' => false])
             ->add('save', SubmitType::class, array('label'=>'Créer l\'article'))
             ->getForm();
         
@@ -61,7 +76,10 @@ class DefaultController extends Controller
         if($form->isSubmitted()&&$form->isValid()) {
             /*Permet d'ajouter le fichier uploader dans le repertoire ci-dessous*/
             $dir = "/bundles/images/";
-            $totalDir = "C:\wamp64\www\pancake-project\web" . $dir;
+
+            $totalDir = "C:\wammp64\wwww\pancake-project\web".$dir;
+
+            //$totalDir = "C:\xammp\htdocs\pancake-project\web" . $dir;
 
             $file = $form['image']->getData();
 
@@ -90,6 +108,14 @@ class DefaultController extends Controller
     public function inscriptionAction(){
         return $this->render('PancakeBundle:Default:inscription.html.twig');
     }
+
+    /**
+    * @Route("/contact",name="contact")
+    */
+    public function contactAction(){
+        return $this->render('PancakeBundle:Default:contact.html.twig');
+    }
+    
     
     /**
     * @Route("/details-crepe/{id}",name="details-crepe", requirements={"id"="\d+"})
@@ -115,34 +141,37 @@ class DefaultController extends Controller
     * @Route("/crepes",name="crepes")
     */
     public function pageCrepesAction(){
-        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
+
+        $em = $this->getDoctrine()->getManager();
+        $crepes = $em->getRepository('PancakeBundle:Pancake')->findByPancake(false);
+        $pancakes = $em->getRepository('PancakeBundle:Pancake')->findByPancake(true);
         
-        if(!$pancake){
-            throw $this->createNotFoundException('Aucun produit trouvé');
+        if(!$crepes){
+            throw $this->createNotFoundException('Aucune crêpe trouvée');
         }
+
+        /*if(!$pancakes){
+            throw $this->createNotFoundException('Aucun pancake trouvé');
+        }*/
         
-        return $this->render('PancakeBundle:Default:crepes.html.twig', array('pancake' => $pancake));
+        return $this->render('PancakeBundle:Default:crepes.html.twig', array('pancakes' => $pancakes, 'crepes' => $crepes));
     }
 
-    /**
-     * @Route("/pancakes",name="pancakes")
-     */
-    public function pagePancakesAction(){
-        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
 
+    /**
+    * @Route("/pancakes",name="pancakes")
+    */
+    public function pagePancakesAction(){
+
+        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
+        
         if(!$pancake){
             throw $this->createNotFoundException('Aucun produit trouvé');
         }
-
+        
         return $this->render('PancakeBundle:Default:pancakes.html.twig', array('pancakes' => $pancake));
     }
 
-    /**
-     * @Route("/contact",name="contact")
-     */
-    public function contactAction(){
-        return $this->render('PancakeBundle:Default:contact.html.twig');
-    }
 
     /**
     * @Route("/test",name="test")
@@ -215,75 +244,36 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/user/new", name="newUser")
+     * @Route("/user/delete/{id}", name="deleteUser", requirements={"id" = "\d+"})
      */
-    public function newUserAction(Request $request)
+    public function deleteAction($id, Request $request)
     {
-        $user = new User();
-        $form = $this->createFormBuilder($user)
-           ->add('name',      TextType::class)
-           ->add('last_name', TextType::class)
-           ->add('email',     EmailType::class)
-           ->add('phone',     TextType::class)
-           ->add('plainPassword', RepeatedType::class, array(
-            'type' => PasswordType::class,
-            'invalid_message' => 'Les champs de mot de passe doivent correspondre',
-            'options' => array('attr' => array('class' => 'password-field')),
-            'required' => true,
-            'first_options'  => array('label' => 'Mot de passe'),
-            'second_options' => array('label' => 'Confirmation du mot de passe')))
-           ->add('save',      SubmitType::class, array('label' => 'Créer le compte'))
-           ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-
-            $user->setUsername($user->getEmail());
-            $user->setEnabled(true);
-            $user->addRole("ROLE_USER");
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('showUser', array('id' => $user->getId()));
-        }
-
-        return $this->render('PancakeBundle:Default:newUser.html.twig', array('form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * @Route("/user/show/{id}", name="showUser", requirements={"id" = "\d+"})
-     */
-    public function showUserAction($id, Request $request) {
         $em = $this->getDoctrine()->getManager();
 
-        // On récupère l'annonce $id
         $user = $em->getRepository('PancakeBundle:User')->find($id);
 
         if (null === $user) {
           throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
         }
 
-        return $this->render('PancakeBundle:Default:showUser.html.twig', array('user' => $user));
-    }
+        $form = $this->createFormBuilder()->getForm();
 
-    /**
-     * @Route("/user/showAll",name="showAllUser")
-     */
-    public function showAllUserAction(){
-        $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:User')->findAll();
-        if($em == null){
-            throw new Exception("Aucun utilisateur trouvé !");
+        if ($form->handleRequest($request)->isValid()) {
+          $em->remove($user);
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été supprimé.");
+
+          return $this->redirect($this->generateUrl('newUser'));
         }
 
-        return $this->render('PancakeBundle:Default:showAllUser.html.twig', array('user' => $em));
-    }
+        return $this->render('PancakeBundle:Default:deleteUser.html.twig', array(
+          'user' => $user,
+          'form'   => $form->createView()
+        ));
 
-    /**
+    }
+         /**
      * @Route("/user/edit/{id}", name="editUser", requirements={"id" = "\d+"})
      */
     public function editUserAction($id, Request $request) {
@@ -298,7 +288,6 @@ class DefaultController extends Controller
         } elseif ($usr != $user) {
             return $this->render('PancakeBundle:Default:editUser.html.twig', array('user' => null));
         } else {
-
             $form = $this->createFormBuilder($user)
                ->add('name',      TextType::class)
                ->add('last_name', TextType::class)
@@ -379,35 +368,78 @@ class DefaultController extends Controller
         }
     }
 
+
     /**
-     * @Route("/user/delete/{id}", name="deleteUser", requirements={"id" = "\d+"})
+     * @Route("/user/show/{id}", name="showUser", requirements={"id" = "\d+"})
      */
-    public function deleteAction($id, Request $request)
-    {
+    public function showUserAction($id, Request $request) {
         $em = $this->getDoctrine()->getManager();
-
+        // On récupère l'annonce $id
         $user = $em->getRepository('PancakeBundle:User')->find($id);
-
         if (null === $user) {
-          throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
+            throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
+        }
+        return $this->render('PancakeBundle:Default:showUser.html.twig', array('user' => $user));
+    }
+
+    /**
+     * @Route("/user/showAll",name="showAllUser")
+     */
+    public function showAllUserAction(){
+        $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:User')->findAll();
+        if($em == null){
+            throw new Exception("Aucun utilisateur trouvé !");
         }
 
-        $form = $this->createFormBuilder()->getForm();
-
-        if ($form->handleRequest($request)->isValid()) {
-          $em->remove($user);
-          $em->flush();
-
-          $request->getSession()->getFlashBag()->add('info', "L'utilisateur a bien été supprimé.");
-
-          return $this->redirect($this->generateUrl('newUser'));
-        }
-
-        return $this->render('PancakeBundle:Default:deleteUser.html.twig', array(
-          'user' => $user,
-          'form'   => $form->createView()
-        ));
+        return $this->render('PancakeBundle:Default:showAllUser.html.twig', array('user' => $em));
     }
 
 
+
+    /**
+     * @Route("/user/new", name="newUser")
+     */
+    public function newUserAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createFormBuilder($user)
+            ->add('name',      TextType::class)
+            ->add('last_name', TextType::class)
+            ->add('email',     EmailType::class)
+            ->add('phone',     TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Confirmation du mot de passe')))
+            ->add('save',      SubmitType::class, array('label' => 'Créer le compte'))
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $user->setUsername($user->getEmail());
+            $user->setEnabled(true);
+            $user->addRole("ROLE_USER");
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('showUser', array('id' => $user->getId()));
+        }
+        return $this->render('PancakeBundle:Default:newUser.html.twig', array('form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/contact/mail", name="mail")
+     */
+    public function sendMail(\Swift_Mailer $mailer){
+       // $mailer = new \Swift_Mailer(new \Swift_SmtpTransport());
+
+        $message = (new \Swift_Message("Test mail"))->setSubject('Objet mail')->setFrom('kepide@sfr.fr')->setTo('monpie50@gmail.com')->setBody("Test");
+        $mailer->send($message);
+
+        return $this->render('PancakeBundle:Default:contact.html.twig');
+    }
 }

@@ -1,0 +1,249 @@
+/*  POUR LE MENU DU HAUT */
+
+/*  FIN DU MENU */
+
+
+/*  POUR LA SELECTION CREPE */
+.entete a
+{
+	background-color: blue;
+}
+
+
+h1{
+	text-align: center;
+}
+
+
+#produit-liste {
+
+	border-bottom-right : 10px;
+	text-align: center;
+
+}
+
+#produit-liste a{
+	margin-left: 5%;
+
+}
+
+h1{
+	font-size: 60px;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+
+#produit-liste prix{
+	background-color: gray;
+	border-radius: 5px;
+	text-align: right;
+	color: white;
+	font-weight: bold;
+}
+
+/*  Partie haut de la crepe */
+.name{
+	margin-left: 15%;
+	width:300px; 
+	background-color: DarkGoldenrod;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	color: white;
+	font-family: Apple Chancery, cursive;
+}
+
+.name:hover{
+	margin-left: 15%;
+	width:300px; 
+	background-color: red;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	color: white;
+	font-family: Apple Chancery, cursive;
+}
+
+/*  Partie bas de la crepe */
+.description{
+	margin-left: 15%;
+	width:301px; 
+	background-color: white;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	color: white;
+	font-family: Apple Chancery, cursive;
+	border : 1px gray solid;
+}
+
+.description a{
+	float: left;
+}
+
+
+.image img{
+	border : 1px gray solid;
+}
+
+/*  FIN DU SELECTION CREPE */
+
+
+
+/*  Parti FOOTER */
+.footer {
+  margin-top: 5%; 
+  position: bottom;
+  width: 100%;
+  height: 200px;
+  background-color: #111;
+  text-align: center;
+}
+
+
+
+.fa-twitter {
+    color: #4099FF;
+}
+
+.fa-facebook {
+    color: #3B5998;
+}
+
+.fa-youtube-play {
+    color: #e52d27;
+}
+
+.fa-rss {
+    color: #FF6600;
+}
+
+.fa-vine {
+    color: #00a478;
+}
+
+.fa-flickr {
+    color: #ff0084;
+}
+
+.fa-twitch {
+    color: #6441A5;
+}
+
+.fa-linkedin {
+    color: #007bb6;
+}
+
+.fa {
+    opacity: 0.7;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.fa:hover{
+    opacity: 1;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.dark-line{
+border-top: 1px solid #525252;
+}
+
+.white-txt{
+color: #FFF;
+}
+
+a.link {
+    color: #008acc;
+    border: 1px #008acc solid;
+    padding: 5px;
+    text-decoration: none;
+}
+
+a.link:hover {
+background: #008acc;
+    color: #383838;
+}
+
+/*  FIN DU FOOTER */
+
+
+/*  PAGE Détail crêpe */
+#image-crepe{
+	margin-left: 5%;
+}
+
+#information-crepe{
+	text-align: left;
+	
+}
+
+#information-crepe h1{
+	color: gray;
+}
+
+#information-crepe description{
+	
+
+	font-size: 20px;
+	text-align: right;
+	color: black;
+	font-weight: bold;
+	font-family: Arial Narrow, sans-serif;
+}
+
+#information-crepe prix{
+	font-size: 35px;
+	text-align: right;
+	color: DarkGoldenrod;
+	font-weight: bold;
+}
+
+#information-crepe select{
+	width: 70px;
+	background-color: lightgray
+}
+
+#information-crepe input{
+	margin-left: 3%;
+	width: 300px;
+	background-color: DarkGoldenrod;
+	border-radius: 5px;
+	color : white;
+	font-weight: bold;
+}	
+
+/*  FIN page détail crêpe */
+
+
+/*  page information */
+.panel-heading h3{
+	font-size: 35px;
+	color: DarkGoldenrod;
+	font-weight: bold;
+	font-family: Arial Narrow, sans-serif;
+}
+
+.panel-body{
+	font-family: Arial Narrow, sans-serif;
+}
+
+#condition-information h2 {
+	text-align: center;
+	background-color: yellow;
+}
+
+.contenu{
+	background-image: url(/bundles/images/laurier.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/*  FIN page information */
+
+
+/*  POUR LA page présentation */
+.presentation-image img{
+	max-width: 100%;
+	height: 30%;
+}
+
+/*  FIN Page présentation */

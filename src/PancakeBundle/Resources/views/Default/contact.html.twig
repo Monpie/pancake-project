@@ -2,70 +2,93 @@
 
 {% block body %}
   {% block information %} {# block information #}
-    <div class="panel panel-default">
+      <div class="panel panel-default">
+    <div class="contenu">
+        <br> </br>
+        <div class="row" style="margin:5%;" >
+            <div class="col-md-4 col-md-push-4 about-content">
+                <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
+            </div>
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Editeur</h3>
+
+            <div class="panel-heading">
+                <div class="col-md-8 col-md-push-4 about-content">
+                    <h3 class="about-title" name="condition-information"> Editeur</h3>
+                     <div class="panel-body">
+                        Vous êtes actuellement connecté sur le site officiel de Crêpe à GoGo, édité par l'ENSIBS. </p>
+                    </div>
+                     </div>
+                </div>
+
+            
         </div>
 
-        <div class="panel-body">Vous êtes actuellement connecté sur le site officiel de Crêpe à GoGo, édité par l'ENSIBS.</div>
+        <div class="row" style="margin:5%;" >
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Droit d'auteur</h3>
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <br> </br>
+                <h3 class="panel-title">Droit d'auteur</h3>
+            </div>
+
+            <div class="panel-body">
+              	Toute reproduction (transfert sur un autre support) des informations ou images du site web est exclusivement limité à l'usage personnel et privé des utilisateurs du réseau internet.
+
+                <br> </br>
+                Toute reproduction ou utilisation de la totalité ou d'une partie substantielle des données du site web est strictement interdite et susceptible de poursuites. 
+
+                <br> </br>
+                La violation des ces dispositions impératives soumet le contrevenant, et toutes les personnes responsables, aux peines pénales et civiles prévues par la Loi française.
+            </div>
+
         </div>
 
-        <div class="panel-body">
-          	Toute reproduction (transfert sur un autre support) des informations ou images du site web est exclusivement limité à l'usage personnel et privé des utilisateurs du réseau internet. 
+            <div class="panel-heading">
+                <br> </br>
+                <h3 class="panel-title">Responsabilité</h3>
+            </div>
+
+            <div class="panel-body">
+              	ENSIBS prend toutes les dispositions pour finir aux internautes un service de qualité et une information fiable, exacte, et exhaustive. Aucune garantié explicite ou implicite n'est néamoins apporté sur ce sujet.
+            </div>
+
+
+
         </div>
 
-        <div class="panel-body">
-          	Toute reproduction ou utilisation de la totalité ou d'une partie substantielle des données du site web est strictement interdite et susceptible de poursuites.
-        </div>
 
-        <div class="panel-body">
-          	La violation des ces dispositions impératives soumet le contrevenant, et toutes les personnes responsables, aux peines pénales et civiles prévues par la Loi française.
         </div>
-
-        <div class="panel-heading">
-            <h3 class="panel-title">Responsabilité</h3>
-        </div>
-
-        <div class="panel-body">
-          	ENSIBS prend toutes les dispositions pour finir aux internautes un service de qualité et une information fiable, exacte, et exhaustive. Aucune garantié explicite ou implicite n'est néamoins apporté sur ce sujet.
-        </div>
-
     </div>
-
   {% endblock %}{# fin block information #}
 
-  {% block javascripts %} {# block javascript #}
-    <script>
-        (function() {
-            var updateButton = document.getElementById('updateDetails');
-            var cancelButton = document.getElementById('cancel');
 
-            // Update button opens a modal dialog
-            updateButton.addEventListener('click', function() {
-                document.getElementById('favDialog').showModal();
-            });
+{# BAS DE PAGE #}   
 
-            // Bouton pour fermer la boîte de dialogue
-            cancelButton.addEventListener('click', function() {           
-                document.getElementById('favDialog').close();
+<div class="footer">
+
+    <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
                 
-            });
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="#">Contact Us</a>&nbsp
+            <a class="link" href="#">Privacy Policy</a>&nbsp
+            <a class="link" href="#">Terms & Conditions</a>
 
-        })();
-    </script>
-  {% endblock %} {# fin block javascript #}
+            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
 
-<!--
-{% set check = true %}
-{% if check %}
-<a class="btn btn-lg btn-success" href="{{path('inscription')}}" role="button">Get started today</a>
-{% else %}
-<a class="btn btn-lg btn-warning" href="#" role="button">Get started tomorrow</a>
-{% endif %}-->
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
+            </p>
+        </div>
 
+    
+</div>
 
 {% endblock %} {# fin block body #}

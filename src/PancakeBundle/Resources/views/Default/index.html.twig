@@ -3,96 +3,106 @@
 {% block body %}
     {# Barre déroulante des offres #}
     {% block carousel %}
-        <div class="row">
-            <div class="col-3">
-                <a href="{{path('crepes')}}"><img class="d-block " src="/bundles/images/crepe.png" height="200" alt="First slide">
-                </a>
-                <center>
-                    <h1> Consulter Crepe ! </h1>
-                </center>
-            </div>
-            <div class="col-6">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
 
-                        {% for i in pancake %}
-                            {% if i.promotion == true %}
-                                <li data-target="#carouselExampleIndicators" data-slide-to="{{i.id}}" class="active"></li>
-                            {% endif %}
+    <div class="row">
+        
+        <div class="col-12">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
 
-                        {% endfor %}
+                    {% for i in pancake %}
+                        {% if i.promotion == true %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{i.id}}" class="active"></li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                    
+                </ol>
 
 
-                    </ol>
-
-
-                    {# Barre déroulante d'images #}
-                    <div class="carousel-inner">
-                        {% set cpt=1 %}
-                        {% for i in pancake %}
-                            {% if i.promotion == true %}
-                                {% if cpt == 1 %} {# Cas du 1er  item qui doit être active #}
-                                    <div class="carousel-item active">
-                                        <a href="{{path('details-crepe',{ 'id': i.id})}}">
-                                            <img class="d-block w-100" src="{{i.image}}" height="300" alt=" slide {{cpt}}">
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    <div class="carousel-item">
-                                        <a href="{{path('details-crepe',{ 'id': i.id})}}">
-                                            <img class="d-block w-100" src="{{i.image}}" height="300" alt=" slide {{cpt}}">
-                                        </a>
-                                    </div>
-
-                                {% endif %}
-
-                                <div class="carousel-caption d-none d-md-block">
-                                    <p>{{i.name}}</p>
+                {# Barre déroulante d'images #}
+                <div class="carousel-inner">
+                    {% set cpt=1 %}
+                    {% for i in pancake %}
+                        {% if i.promotion == true %}
+                            {% if cpt == 1 %} {# Cas du 1er  item qui doit être active #}
+                                 <div class="carousel-item active">
+                                    <a href="{{path('details-crepe',{ 'id': i.id})}}">
+                                        <img class="d-block w-100" src="{{i.image}}" height="400"  alt=" slide {{cpt}}">
+                                    </a>
                                 </div>
-                                {% set cpt = cpt+1 %}
+                            {% else %}
+                                <div class="carousel-item">
+                                    <a href="{{path('details-crepe',{ 'id': i.id})}}">
+                                        <img class="d-block w-100" src="{{i.image}}" height="400"   alt=" slide {{cpt}}">
+                                    </a>
+                                </div>
+
                             {% endif %}
+                             
+                            <div class="carousel-caption d-none d-md-block">
+                                <p>{{i.name}}</p>
+                            </div>
+                        {% set cpt = cpt+1 %}
+                        {% endif %}
 
-                        {% endfor %}
-
-
-
-
-
-
-                    </div>  {# Fin de div #}
-
+                    {% endfor %}
 
 
 
-                    {# Bouton pour les slides (gauche) #}
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
+                    
 
-                    {# Bouton pour les slides (droite) #}
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
 
-                <div style="background-color:powderblue;">
+                </div>  {# Fin de div #}
+
+
+
+
+                {# Bouton pour les slides (gauche) #}
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+
+                {# Bouton pour les slides (droite) #}
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <div style="background-color:powderblue;">
                     <center>
                         <h1> Offre du jour ! </h1>
                     </center>
-                </div>
-            </div>
+            </div>  
+         </div>
 
+         <div class="col-3">
+            <a href="{{path('crepes')}}"><img class="d-block " src="/bundles/images/crepe.png" height="200" alt="First slide">
+                </a>
+                <center>
+                        <h1> Consulter Crepe ! </h1>
+                </center>
+        </div>
 
-            <div class="col-3">
+         <div class="col-3">
                 <a href="{{path('pancakes')}}"><img class="d-block " src="/bundles/images/pancake.png" height="200" alt="First slide">
                 </a>
                 <center>
-                    <h1> Consulter Pancake ! </h1>
+                        <h1> Consulter Pancake ! </h1>
                 </center>
-            </div>
-
         </div>
-    {% endblock %}
-    {% endblock %}
+
+    </div>
+
+                
+
+            
+    {% endblock %} {# fin block carhousel #}
+
+       
+
+ {% endblock %} {# fin block body #}
+

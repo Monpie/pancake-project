@@ -99,6 +99,7 @@ class PrivilegeController extends Controller
 
     /**
      * @Route("/admin/edit/userPwd/{id}", name="editAdminUserPwd", requirements={"id" = "\d+"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAdminUserPasswordAction($id, Request $request) {
         $usr = $this->get('security.token_storage')->getToken()->getUser();
