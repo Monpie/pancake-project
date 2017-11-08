@@ -108,9 +108,9 @@ class PanierController extends Controller
             $session->getFlashBag()->add('success','Article ajouté avec succès');
         }
 
-        $session->set('panier',$panier);
+       /* $session->set('panier',$panier);
 
-        if (array_key_exists($id, $panier)) {
+       if (array_key_exists($id, $panier)) {
             if ($request->query->get('quantity') != null) {
                 $panier[$id] += $request->query->get('quantity');
             }
@@ -122,7 +122,7 @@ class PanierController extends Controller
             }
 
             $session->getFlashBag()->add('success', 'Article ajouté avec succès');
-        }
+        }*/
 
         $session->set('panier', $panier);
 
