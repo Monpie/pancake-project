@@ -15,13 +15,7 @@
                         Catalogue
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-<<<<<<< HEAD
                         <a class="dropdown-item" href="{{path('crepes')}}">Nos Crêpes</a>
-=======
-                        <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
-
-                        <a class="dropdown-item" href="{{ path('crepes') }}#pancake-selection">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
->>>>>>> dd61e3e012c90ef298bbba5acd4bae67913543b6
                         {% if app.user != null and ("ROLE_STAFF" in app.user.roles) %}
                             <a class="dropdown-item" href="{{path('newCrepe')}}">Ajouter une crêpe</a>
                         {% endif %}
