@@ -4,8 +4,7 @@
 
 
 {% block body %}
-    {% block images %} {# block image #}    
-       
+
         {# choix des crepes #}
         <div id="crepe-selection">
             <h1>
@@ -21,7 +20,7 @@
                     {% endif %}
 
                     <div class="col-4" id="produit-liste"> {#  div col-4 #}
-                   
+
                         {% if i.name==null %}
                             <p>Aucun produit trouvé</p>
                         {% else %}
@@ -55,26 +54,26 @@
 
 
                         {% endif %}
-                </div> {# fin div col-4 #}
+                    </div> {# fin div col-4 #}
 
-                {% if cpt == 3 %}
-                    </div>{# fin div row #}
-                    {% set cpt = 0 %}
-                {% endif %}
+                    {% if cpt == 3 %}
+                        </div>{# fin div row #}
+                        {% set cpt = 0 %}
+                    {% endif %}
 
 
                 {% endfor %}
 
 
-                {# Cas ou on n'a pas pas plus de 3 articles à la fin #}  
+                {# Cas ou on n'a pas pas plus de 3 articles à la fin #}
                 {% if cpt != 3  and cpt != 0 %}
-                    </div>{# fin div row #}
-                {% endif %}  
+            </div>{# fin div row #}
+            {% endif %}
 
         </div> {# fin div W3 container #}
 
-    </div> {# fin div crepe selection #}
-    
+        </div> {# fin div crepe selection #}
+
 
     <div id="pancake-selection">
         <h1>
@@ -90,7 +89,7 @@
                     {% endif %}
 
                     <div class="col-4" id="produit-liste"> {#  div col-4 #}
-                   
+
                         {% if i.name==null %}
                             <p>Aucun produit trouvé</p>
                         {% else %}
@@ -98,6 +97,7 @@
                                 <div class="name">
                                     <h3>{{i.name}}</h3>
                                 </div>
+
 
                                 <div class="image">
                                     <img src="{{i.image}}"  alt="crêpe 1" title="Pancake"  height="200" width="300" />
@@ -125,37 +125,36 @@
 
 
                         {% endif %}
-                </div> {# fin div col-4 #}
+                    </div> {# fin div col-4 #}
 
-                {% if cpt == 3 %}
-                    </div>{# fin div row #}
-                    {% set cpt = 0 %}
-                {% endif %}
+                    {% if cpt == 3 %}
+                        </div>{# fin div row #}
+                        {% set cpt = 0 %}
+                    {% endif %}
 
 
                 {% endfor %}
 
-                {# Cas ou on n'a pas pas plus de 3 articles à la fin #}  
+                {# Cas ou on n'a pas pas plus de 3 articles à la fin #}
                 {% if cpt != 3  and cpt != 0 %}
-                    <a> cpt fin 2 : </a>
-                    <a> {{cpt}} </a>
-                    </div>{# fin div row #}
-                {% endif %}  
+                <a> cpt fin 2 : </a>
+                <a> {{cpt}} </a>
+            </div>{# fin div row #}
+            {% endif %}
 
         </div> {# fin div W3 container #}
 
-    </div> {# fin div crepe selection #}
-{% endblock %} {# fin block image #}
+        </div> {# fin div crepe selection #}
 
-   
-{# BAS DE PAGE #}   
 
-<div class="footer">
+    {# BAS DE PAGE #}
 
-    <div class="copyrights">
+    <div class="footer">
+
+        <div class="copyrights">
             <p class="white-txt">Crêpe à gogo ! © 2017
                 <br><br>
-                
+
             </p>
             <hr class="dark-line">
             <a class="link" href="#">Contact Us</a>&nbsp
@@ -173,9 +172,6 @@
             </p>
         </div>
 
-    
-</div>
+
+    </div>
 {% endblock %}{# fin block body #}
-
-
-

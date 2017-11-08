@@ -28,7 +28,8 @@
         "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^2.0",
         "twitter/bootstrap": "4.0.0-beta",
-        "components/jquery": "^3.2"
+        "components/jquery": "^3.2",
+		"symfony/assetic-bundle": "~2.8.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

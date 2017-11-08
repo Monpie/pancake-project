@@ -1,0 +1,8 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+
+    {% for i in user %}
+        <p>Nom : {{ i.name }}</p>
+    {% endfor %}
+{% endblock %}

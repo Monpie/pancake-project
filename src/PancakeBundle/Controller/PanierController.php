@@ -153,8 +153,11 @@ class PanierController extends Controller
     public function validerAction(Session $session)
     {
         if ($this->getUser() != null) {
-            $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake');
-            if (!$this->getUser()->getPurchases()->isEmpty()) {
+                $this->createHistorique($session);
+                $session->clear();
+            return $this->redirect($this->generateUrl('panier'));
+
+          /*  if (!$this->getUser()->getPurchases()->isEmpty()) {
                 $currentDate = new \DateTime('now');
                 foreach ($this->getUser()->getPurchases() as $elem) {
                     $diffDate = $currentDate->diff($elem->getDate());
@@ -169,23 +172,18 @@ class PanierController extends Controller
                         }
 
                     } else {
-                        /*$historique = new Historique();
-                        $historique->setDate($currentDate);
-                        $historique->setUser($this->getUser());
-                        $historique->setQuantity($qty);
-                        $historique->setPancakeArray($elem->getPancakeArray());
-                        $this->getDoctrine()->getManager()->persist($historique);
-                        $this->getDoctrine()->getManager()->flush();*/
                    // $this->createSingleHistorique($currentDate, , $elem->getPancakeArray());
+
+                       if($session->get('panier'))
                         $qty = (int)array_values($session->get('panier'));
-                        $this->createSingleHistorique($currentDate,$qty,$elem->getPancakeArray());
+                        $this->createSingleHistorique($currentDate,$qty,);
                      }
                 }
             } else {
                 $historique[] = $this->createHistorique($session);
             }
             $session->clear();
-            return $this->redirect($this->generateUrl('panier'));
+            return $this->redirect($this->generateUrl('panier'));*/
         } else {
             return $this->redirectToRoute('login');
         }
@@ -210,6 +208,21 @@ class PanierController extends Controller
         }
     }
 
+    /**
+     * @Route("/show/all_historique", name="showAllUserHistorique")
+     */
+    public function showAllUserHistorique()
+    {
+        $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Historique')->findAll();
+        $cpt = 0;
+        foreach($em as $elem){
+            $tab[$cpt] = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findOneById($elem->getPancakeArray());
+            $cpt++;
+        }
+        return $this->render('PancakeBundle:Default:allHistorique.html.twig', array('historique' =>$em,
+            'pancake'=>$tab));
+    }
+
     public function totalPrice(Session $session)
     {
         $total = 0;
@@ -220,6 +233,8 @@ class PanierController extends Controller
         }
         return $total;
     }
+
+
 
     public function createHistorique(Session $session)
     {

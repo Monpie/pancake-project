@@ -17,15 +17,12 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-
-
 use PancakeBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 
 class DefaultController extends Controller
 {
@@ -73,8 +70,8 @@ class DefaultController extends Controller
             ->add('image', FileType::class)
             ->add('rate', PercentType::class)
             ->add('avaibility', CheckboxType::class, ['required' => false])
-            ->add('pancake', CheckboxType::class, ['required' => false])
             ->add('promotion', CheckboxType::class, ['required' => false])
+            ->add('pancake', CheckboxType::class, ['required' => false])
             ->add('save', SubmitType::class, array('label'=>'Créer l\'article'))
             ->getForm();
         
@@ -82,9 +79,7 @@ class DefaultController extends Controller
         if($form->isSubmitted()&&$form->isValid()) {
             /*Permet d'ajouter le fichier uploader dans le repertoire ci-dessous*/
             $dir = "/bundles/images/";
-
             $totalDir = $this->get('kernel')->getRootDir().'/../web'.$dir;
-
             $file = $form['image']->getData();
 
             if (strcmp($file->guessExtension(), "jpeg") == 0 || strcmp($file->guessExtension(),"png") == 0) {
@@ -251,9 +246,9 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Aucune crêpe trouvée');
         }
 
-        if(!$pancakes){
+        /*if(!$pancakes){
             throw $this->createNotFoundException('Aucun pancake trouvé');
-        }
+        }*/
         
         return $this->render('PancakeBundle:Default:crepes.html.twig', array('pancakes' => $pancakes, 'crepes' => $crepes));
     }
@@ -394,21 +389,33 @@ class DefaultController extends Controller
         }
     }
 
+
     /**
      * @Route("/user/show/{id}", name="showUser", requirements={"id" = "\d+"})
      */
     public function showUserAction($id, Request $request) {
         $em = $this->getDoctrine()->getManager();
-
         // On récupère l'annonce $id
         $user = $em->getRepository('PancakeBundle:User')->find($id);
-
         if (null === $user) {
-          throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
+            throw new NotFoundHttpException("L'utilisateur d'id ".$id." n'existe pas.");
         }
-
         return $this->render('PancakeBundle:Default:showUser.html.twig', array('user' => $user));
     }
+
+    /**
+     * @Route("/user/showAll",name="showAllUser")
+     */
+    public function showAllUserAction(){
+        $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:User')->findAll();
+        if($em == null){
+            throw new Exception("Aucun utilisateur trouvé !");
+        }
+
+        return $this->render('PancakeBundle:Default:showAllUser.html.twig', array('user' => $em));
+    }
+
+
 
     /**
      * @Route("/user/new", name="newUser")
@@ -417,39 +424,43 @@ class DefaultController extends Controller
     {
         $user = new User();
         $form = $this->createFormBuilder($user)
-           ->add('name',      TextType::class)
-           ->add('last_name', TextType::class)
-           ->add('email',     EmailType::class)
-           ->add('phone',     TextType::class)
-           ->add('plainPassword', RepeatedType::class, array(
-            'type' => PasswordType::class,
-            'invalid_message' => 'Les champs de mot de passe doivent correspondre',
-            'options' => array('attr' => array('class' => 'password-field')),
-            'required' => true,
-            'first_options'  => array('label' => 'Mot de passe'),
-            'second_options' => array('label' => 'Confirmation du mot de passe')))
-           ->add('save',      SubmitType::class, array('label' => 'Créer le compte'))
-           ->getForm();
-
+            ->add('name',      TextType::class)
+            ->add('last_name', TextType::class)
+            ->add('email',     EmailType::class)
+            ->add('phone',     TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Confirmation du mot de passe')))
+            ->add('save',      SubmitType::class, array('label' => 'Créer le compte'))
+            ->getForm();
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-
             $user->setUsername($user->getEmail());
             $user->setEnabled(true);
             $user->addRole("ROLE_USER");
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
-            return $this->redirectToRoute('showUser', array('id' => $user->getId()));
+            return $this->redirectToRoute('home');
         }
-
         return $this->render('PancakeBundle:Default:newUser.html.twig', array('form' => $form->createView(),
         ));
     }
 
+    /**
+     * @Route("/contact/mail", name="mail")
+     */
+    public function sendMail(\Swift_Mailer $mailer){
+       // $mailer = new \Swift_Mailer(new \Swift_SmtpTransport());
 
+        $message = (new \Swift_Message("Test mail"))->setSubject('Objet mail')->setFrom('kepide@sfr.fr')->setTo('monpie50@gmail.com')->setBody("Test");
+        $mailer->send($message);
+
+        return $this->render('PancakeBundle:Default:contact.html.twig');
+    }
 }

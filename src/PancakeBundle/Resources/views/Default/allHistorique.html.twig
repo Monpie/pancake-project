@@ -1,0 +1,13 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+    {% block navbar %}
+        {{ parent() }}
+    {% endblock %}
+
+
+    {% for elem in historique %}
+        <p><strong>Date d'achat :</strong> {{ elem.date.format('Y-m-d H:i:s') }}, Client : {{ elem.user.name }}, <img src="{{ elem.pancakeArray.image }}" height="50" width="50"> {{ elem.pancakeArray.name }}, quantity : {{ elem.quantity }}</p>
+
+    {% endfor %}
+{% endblock %}
