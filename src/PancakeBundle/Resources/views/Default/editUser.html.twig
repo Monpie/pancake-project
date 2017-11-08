@@ -48,9 +48,8 @@
                 </div>
 
                 <a type="button" class="btn btn-secondary" href="{{ path('editPwd', {'id' : user.id}) }}">Changer de mot de passe</a>
-                <a type="button" class="btn btn-danger" href="{{ path('deleteUser', {'id' : user.id}) }}">Supprimer le compte</a>
-
                 {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                <a type="button" class="btn btn-danger" href="{{ path('deleteUser', {'id' : user.id}) }}">Supprimer le compte</a>
 
                 {{ form_end(form) }}
             </div>
