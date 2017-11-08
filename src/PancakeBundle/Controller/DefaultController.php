@@ -35,7 +35,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
 
-        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findAll();
+        $pancake = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findByPromotion(true);
         
         if(!$pancake){
             throw $this->createNotFoundException('Aucun produit trouvé');

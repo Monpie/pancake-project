@@ -3,69 +3,20 @@
 {% block body %}
 
 
-  {# block header #}
-    {% block header %}
-        <img class="d-block " src="/bundles/images/logo.jpg"  alt="Logo">
-    {% endblock %} {# fin block header #}
-
-
-
-    {# block navbar #}
-    {% block navbar %}
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-
-
-                    <li class="nav-item active" >
-                        <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Catalogue
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
-                            <a class="dropdown-item" href="#">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
-                        </div>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('contact')}}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('panier')}}">Panier</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Connexion
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{path('inscription')}}">Connexion</a>
-                            <a class="dropdown-item" href="{{path('inscription')}}">Inscription</a>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-
-    {% endblock %} {# fin block navbar #}
-
-
-  {% block information %} {# block information #}
+  {% block information1 %} {# block information #}
     <div class="presentation-image">
-        <a><img class="d-block " src="/bundles/images/champsBle.jpg" width="" alt="First slide"> </a>
-        <p> Utilisation de farine bio </p>
+        <section> {# Partie1 #}
+            <a><img class="d-block " src="/bundles/images/champsBle.jpg" width="" alt="First slide"> </a>
+            <description1> Utilisation de farine bio </description1>
+        </section>
+
+
+        <section> {# Partie2 #}
+            <a><img class="d-block " src="/bundles/images/Main-farine1.jpg" width="" alt="First slide"> </a>
+            <description2> une qualité présente </description2>
+    </section>
     </div>
   {% endblock %}{# fin block information #}
-
 
 {# BAS DE PAGE #}   
 

@@ -11,9 +11,9 @@
                 <ol class="carousel-indicators">
 
                     {% for i in pancake %}
-                        {% if i.promotion == true %}
+                        
                             <li data-target="#carouselExampleIndicators" data-slide-to="{{i.id}}" class="active"></li>
-                        {% endif %}
+                        
 
                     {% endfor %}
 
@@ -25,7 +25,7 @@
                 <div class="carousel-inner">
                     {% set cpt=1 %}
                     {% for i in pancake %}
-                        {% if i.promotion == true %}
+                        
                             {% if cpt == 1 %} {# Cas du 1er  item qui doit être active #}
                                  <div class="carousel-item active">
                                     <a href="{{path('details-crepe',{ 'id': i.id})}}">
@@ -41,11 +41,9 @@
 
                             {% endif %}
                              
-                            <div class="carousel-caption d-none d-md-block">
-                                <p>{{i.name}}</p>
-                            </div>
+                            
                         {% set cpt = cpt+1 %}
-                        {% endif %}
+                      
 
                     {% endfor %}
 
@@ -72,6 +70,8 @@
                 </a>
             </div>
 
+
+
             <div style="background-color:powderblue;">
                     <center>
                         <h1> Offre du jour ! </h1>
@@ -79,30 +79,81 @@
             </div>  
          </div>
 
-         <div class="col-3">
-            <a href="{{path('crepes')}}"><img class="d-block " src="/bundles/images/crepe.png" height="200" alt="First slide">
-                </a>
-                <center>
-                        <h1> Consulter Crepe ! </h1>
-                </center>
-        </div>
-
-         <div class="col-3">
-                <a href="{{path('pancakes')}}"><img class="d-block " src="/bundles/images/pancake.png" height="200" alt="First slide">
-                </a>
-                <center>
-                        <h1> Consulter Pancake ! </h1>
-                </center>
-        </div>
+         
 
     </div>
+
+
+
+         
+     <br></br> 
+   <div class="row">
+
+         <div class="col-4">
+            <a href="{{path('crepes')}}"> 
+                <div class="image">
+                    <img class="d-block " src="/bundles/images/crepe.png" alt="First slide" height="200" width="300">
+                </div>
+                <h2> Consulter Crepe !</h2>
+            </a>
+         </div>
+
+        <div class="col-4">
+            <a href="{{path('presentation')}}"> 
+                <div class="image">
+                    <img class="d-block " src="/bundles/images/laurier.jpg" alt="First slide" height="200" width="300">
+                </div>
+                <h2> Présentation du site</h2>
+            </a>
+         </div>
+
+
+         <div class="col-4">
+            <a href="{{path('pancakes')}}"> 
+                <div class="image">
+                    <img class="d-block " src="/bundles/images/pancake.png" alt="First slide" height="200" width="300">
+                </div>
+                <h2> Consulter Pancake !</h2>
+            </a>
+         </div>
+
+
+   </div> 
 
                 
 
             
     {% endblock %} {# fin block carhousel #}
 
-       
+    
+
+{# BAS DE PAGE #}   
+
+<div class="footer">
+
+    <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
+                
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="#">Contact Us</a>&nbsp
+            <a class="link" href="#">Privacy Policy</a>&nbsp
+            <a class="link" href="#">Terms & Conditions</a>
+
+            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
+
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
+            </p>
+        </div>
+
+    
+</div>
 
  {% endblock %} {# fin block body #}
 

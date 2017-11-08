@@ -1,29 +1,126 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
+
+
+    <div style="background-color:powderblue;">
+        <center>
+            <h1> Panier </h1>
+        </center>
+     </div>  
+
+    {# cas du panier vide #}
     {%  if panier == null %}
         <p> Votre panier est vide ! </p>
         <p> Veuillez ajouter un article avant de passer une commande</p>
-    {%  else %}
-        {% for elem,key  in panier %}
-           {% for pan in pancake %}
-                {% if elem == pan.id %}
-                    <p><img src="{{ pan.image }}" height="50" width="50"> {{ pan.name }}, quantité : {{ key }}, prix unitaire: {{ pan.price }}€, prix : {{ pan.price*key }}€</p>
-                    <form method="get" action=" {{ path('supprimer', {'id' : pan.id}) }}">
-                        <input type="submit" name="delete {{ elem }}" value="x">
-                    </form>
-                {%  endif %}
-            {% endfor %}
+   
 
-        {% endfor %}
+    {# si le panier n'est pas vide #}
+   {%  else %}
+   <div class="tableau-panier">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Article(s)</th>
+                    <th scope="col">Prix unitaire</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix total</th>
+                    <th scope="col">Supprimer</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                {% for elem,key  in panier %}
+                   {% for pan in pancake %}
+
+
+                        {% if elem == pan.id %}
+                             <tr>
+                                <td> <img src="{{ pan.image }}" height="50" width="50"> {{ pan.name }} </td>
+                                <td>{{ pan.price }}€</td>
+                                <td>{{ key }}</td>
+                                <td>{{ pan.price*key }}€</td>
+                                <td>
+                                    <form method="get" action=" {{ path('supprimer', {'id' : pan.id}) }}">
+                                        <input type="submit" name="delete {{ elem }}" value="x">
+                                    </form>
+                                </td>
+                             </tr>
+
+                        {%  endif %}
+                    {% endfor %}
+
+                {% endfor %}
+                
+                {% for message in app.session.flashbag.get('info') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+           
+            <tr>
+                <td>Montant total : {{ totalPrice }}€</td>
+            </tr>
+             
+            </tbody>
+
+
+        </table>
+
+        <div class="row"> {# div ROW#}
+
+
+            <div class="col-6"> {# div col4#}
+                <div class="boutonContinuer">
+                        <form method="get" action="{{path('crepes')}}">
+                            <input type="submit" name="valider" value="Continuer les achats">
+                        </form>
+                </div>
+            </div>
+
+            <div class="col-6"> {# div col4#}
+                <div class="boutonValider">
+                        <form method="get" action="{{ path('valider') }}">
+                            <input type="submit" name="valider" value="Payer la commande">
+                        </form>
+                </div>
+            </div>
+
+
+        </div> {# FIN div ROW#}
         
-        {% for message in app.session.flashbag.get('info') %}
-            <p>{{ message }}</p>
-        {% endfor %}
+    </div>
+    {% endif %} {# fin du si #}
 
-        <p>Prix total du panier : {{ totalPrice }}€</p>
-        <form method="get" action="{{ path('valider') }}">
-            <input type="submit" name="valider" value="Payer la commande">
-        </form>
-    {% endif %}
+
+
+
+
+{# BAS DE PAGE #}   
+
+<div class="footer">
+
+    <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
+                
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="#">Contact Us</a>&nbsp
+            <a class="link" href="#">Privacy Policy</a>&nbsp
+            <a class="link" href="#">Terms & Conditions</a>
+
+            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
+            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
+
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
+            </p>
+        </div>
+
+    
+</div>
+
 {% endblock %}
