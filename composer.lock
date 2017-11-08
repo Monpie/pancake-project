@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c54eb436a78a51e5fe2510fc83432b5a",
+    "content-hash": "d7c0f4b2ce00940a7de0b6a573b10763",
     "packages": [
         {
             "name": "components/jquery",

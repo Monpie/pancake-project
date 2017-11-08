@@ -1,7 +1,7 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
-    <h2>Modifier votre compte</h2>
+    <h1>Modifier votre compte</h1>
 
     <div class="row">
         <div class="col"></div>
@@ -48,8 +48,10 @@
                 </div>
 
                 <a type="button" class="btn btn-secondary" href="{{ path('editPwd', {'id' : user.id}) }}">Changer de mot de passe</a>
-
+                <br><br>
                 {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                <br><br>
+                <a type="button" class="btn btn-danger" href="{{ path('deleteUser', {'id' : user.id}) }}">Supprimer le compte</a>
 
                 {{ form_end(form) }}
             </div>

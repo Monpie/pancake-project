@@ -1,6 +1,7 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
+
 {# Affichage détail de la crêpe #}
 <br> </br>
 
@@ -15,13 +16,13 @@
 			<div class="col-4" id="information-crepe"> {# div col8#}
 				<h1>{{pancake.name}}</h1>
 				<description>{{pancake.description}}</description></br>
-				{% if pancake.promotion == true %}
+				{% if pancake.rate > 0 %}
 					<del>
 						<prixBare>{{pancake.price}} €</prixBare>
 					</del>
 
 					<br></br>
-					<prixPromotion>{{pancake.price}} €</prixPromotion>
+					<prixPromotion>{{ (pancake.price * (1- pancake.rate))|number_format(2) }} €</prixPromotion>
 				{% else %}
 					<prix>{{pancake.price}} €</prix>
 				{% endif %}
@@ -45,30 +46,6 @@
 
 {# BAS DE PAGE #}   
 
-<div class="footer">
 
-    <div class="copyrights">
-            <p class="white-txt">Crêpe à gogo ! © 2017
-                <br><br>
-                
-            </p>
-            <hr class="dark-line">
-            <a class="link" href="#">Contact Us</a>&nbsp
-            <a class="link" href="#">Privacy Policy</a>&nbsp
-            <a class="link" href="#">Terms & Conditions</a>
-
-            <a href='#'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
-            <a href='#'><i class="fa fa-twitter fa-3x fa-fw"></i></a>
-            <a href='#'><i class="fa fa-youtube-play fa-3x fa-fw"></i></a>
-            <a href='#'><i class="fa fa-linkedin fa-3x fa-fw"></i></a>
-
-            <br><br>
-            <p class="white-txt small">
-                Toute reproduction du site Crêpe à gogo ! est formellement interdite !
-            </p>
-        </div>
-
-    
-</div>
 
 {% endblock %} {# fin block body #}

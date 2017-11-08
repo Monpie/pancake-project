@@ -1,6 +1,5 @@
 {% extends '::base.html.twig' %}
 
-
 {% block navbar %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" text-align="right">
         <a class="navbar-brand" href="{{path('home')}}"><img class="d-block " src="/bundles/images/logo.png" alt="Crêpes à Gogo"> </a>
@@ -15,16 +14,11 @@
                         Catalogue
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{path('crepes')}}">Crêpes</a>
-                        <a class="dropdown-item" href="{{ path('crepes') }}#pancake-selection">Pancakes</a> {#Modifier le href quand le fichier sera créé #}
+                        <a class="dropdown-item" href="{{path('crepes')}}">Nos Crêpes</a>
                         {% if app.user != null and ("ROLE_STAFF" in app.user.roles) %}
-                            <a class="dropdown-item" href="{{path('newCrepe')}}">Ajouter Crêpe</a>
+                            <a class="dropdown-item" href="{{path('newCrepe')}}">Ajouter une crêpe</a>
                         {% endif %}
                     </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('contact') }}">Contact</a>
                 </li>
 
                 <li class="nav-item">
@@ -40,6 +34,10 @@
                             {% if app.user != null and ("ROLE_ADMIN" in app.user.roles) %}
                                 <a class="dropdown-item" href="{{path('listUsers')}}">Administration</a>
                             {% endif %}
+
+                            {% if app.user != null and ("ROLE_STAFF" in app.user.roles) %}
+                                <a class="dropdown-item" href="{{path('showAllUserHistorique')}}">Historique des achats</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
                         </div>
                     </li>
@@ -54,3 +52,24 @@
     </nav>
 {% endblock %} {# fin block navbar #}
 
+{% block footer %}
+    <div class="footer">
+
+        <div class="copyrights">
+            <p class="white-txt">Crêpe à gogo ! © 2017
+                <br><br>
+
+            </p>
+            <hr class="dark-line">
+            <a class="link" href="{{ path('messagerie') }}">Contact</a>
+            <a class="link" href="{{ path('contact') }}">Informations légales</a>
+
+            <br><br>
+            <p class="white-txt small">
+                Toute reproduction du site Crêpe à gogo est formellement interdite !
+            </p>
+        </div>
+
+
+    </div>
+{% endblock %}

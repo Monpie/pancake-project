@@ -1,0 +1,7 @@
+{# src/PancakeBundle/Resources/view/Contact/contactEmail.txt.twig #}
+Un formulaire de contact à été réalisé par {{ enquiry.name }} le {{ "now" | date("Y-m-d H:i") }}.
+
+Reply-to: {{ enquiry.email }}
+Objet: {{ enquiry.subject }}
+Message:
+{{ enquiry.body }}

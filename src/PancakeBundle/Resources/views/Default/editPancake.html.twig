@@ -1,0 +1,84 @@
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+	<h2>Modifier la crêpe</h2>
+
+    <div class="row">
+        <div class="col"></div>
+
+        <div class="well col-5">
+         	{% for type, messages in app.session.flashbag.all() %}
+         		{% for message in messages %}
+         			<p class="alert alert-{{ type }}" role="alert">{{ message | raw }}</p>
+         		{% endfor %}
+         	{% endfor %}
+
+         	{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+         	{# Les erreurs générales du formulaire. #}
+         	{{ form_errors(form) }}
+
+         	<div class="form-group">
+                {{ form_label(form.name, "Nom crêpe", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.price, "Prix de la crêpe", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.rate, "Taux de promotion", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.rate, {'attr': {'class': 'form-control'}}) }}
+
+                <small class="form-text text-muted">Aucune promotion = 0%</small>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.description, "Description", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    {{ form_widget(form.avaibility, {'attr': {'class': 'form-check-input' }}) }}
+                    Produit disponible ?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    {{ form_widget(form.promotion, {'attr': {'class': 'form-check-input' }}) }}
+                    En vitrine ?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    {{ form_widget(form.pancake, {'attr': {'class': 'form-check-input' }}) }}
+                    Est-ce un pancake ? (non = crêpe)
+                </label>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.image, "Image :", {'label_attr' : {'class':'control-label'}}) }}
+                {{ form_widget(form.image, {'attr' : {'class' : 'form-control'}}) }}
+            </div>
+            {% if  form.image == null %}
+                {% for message in app.session.flashbag.get('info') %}
+                    {{ message }}
+                    {% endfor %}
+                <p>Erreur format de fichier incorrect. Seul les fichiers jpeg et png sont acceptés</p>
+            {% endif %}
+
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+            <a type="button" class="btn btn-danger" href="{{ path('deletePancake', {'id' : pancake.id}) }}">Supprimer l'article</a>
+
+            {{ form_end(form) }}
+        </div>
+
+        <div class="col"></div>
+    </div>
+{% endblock %}
