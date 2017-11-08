@@ -246,4 +246,14 @@ background: #008acc;
 	height: 30%;
 }
 
+
+
 /*  FIN Page présentation */
+
+
+/*  tableau panier*/
+.tableau-panier th, td {
+    border-bottom: 1px solid #ddd;
+    background-color: yellow;
+}
+/*  fin tableau panier */

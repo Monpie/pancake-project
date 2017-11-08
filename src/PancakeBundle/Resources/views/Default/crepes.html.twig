@@ -5,11 +5,12 @@
 
 {% block body %}
     {% block images %} {# block image #}    
-        <h1>
-            Carte des crêpes
-        </h1>
+       
         {# choix des crepes #}
         <div id="crepe-selection">
+            <h1>
+                Carte des crêpes
+            </h1>
             <div class="w3-container"> {# div W3 container#}
                 {% set cpt=0 %}
 
@@ -69,12 +70,12 @@
     </div> {# fin div crepe selection #}
     
 
-
+    <div id="pancake-selection">
         <h1>
             Carte des pancakes
         </h1>
         {# choix des crepes #}
-        <div id="pancake-selection">
+        
             <div class="w3-container"> {# div W3 container#}
                 {% set cpt=0 %}
                 {% for i in pancakes %}
@@ -92,9 +93,9 @@
                                     <h3>{{i.name}}</h3>
                                 </div>
 
-                                
-                                <img src="{{i.image}}"  alt="crêpe 1" title="Pancake"  height="200" width="300" />
-                                
+                                <div class="image">
+                                    <img src="{{i.image}}"  alt="crêpe 1" title="Pancake"  height="200" width="300" />
+                                </div>
                             </a>
 
                             {# Description de l'image#}
