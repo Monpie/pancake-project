@@ -1,13 +1,43 @@
 {% extends 'PancakeBundle::layout.html.twig' %}
 
 {% block body %}
-    {% block navbar %}
-        {{ parent() }}
-    {% endblock %}
 
+    <h1>Historique des achats</h1>
+    <div class="row">
+        <div class="col"></div>
 
-    {% for elem in historique %}
-        <p><strong>Date d'achat :</strong> {{ elem.date.format('Y-m-d H:i:s') }}, Client : {{ elem.user.name }}, <img src="{{ elem.pancakeArray.image }}" height="50" width="50"> {{ elem.pancakeArray.name }}, quantity : {{ elem.quantity }}</p>
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Crêpe</th>
+                    <th scope="col">Quantité</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set i = 0 %}
+                {% for elem in historique %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                        {% set i = i + 1 %}
+                        <td>{{ elem.user.lastName }}</td>
+                        <td>{{ elem.user.name }}</td>
+                        <td>{{ elem.date.format('Y-m-d H:i:s') }}</td>
+                        <td><img src="{{ elem.pancakeArray.image }}" height="50" width="50"></td>
+                        <td> {{ elem.pancakeArray.name }}</td>
+                        <td>{{ elem.quantity }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    {% endfor %}
+        <div class="col"></div>
+    </div>
+
 {% endblock %}

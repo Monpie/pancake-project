@@ -3,10 +3,6 @@ pancake:
     type:     annotation
     prefix:   /
 
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-
 login:
     path:   /login
     defaults:  { _controller: PancakeBundle:Security:login }

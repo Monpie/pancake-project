@@ -2,6 +2,7 @@
 
 namespace PancakeBundle\Controller;
 
+use Doctrine\DBAL\Types\DecimalType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -65,7 +66,7 @@ class DefaultController extends Controller
         
         $form = $this->createFormBuilder($pancake)
             ->add('name', TextType::class)
-            ->add('price', MoneyType::class)
+            ->add('price', DecimalType::class)
             ->add('description', TextareaType::class)
             ->add('image', FileType::class)
             ->add('rate', PercentType::class)
@@ -446,9 +447,10 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            
             return $this->redirectToRoute('home');
         }
-        return $this->render('PancakeBundle:Default:newUser.html.twig', array('form' => $form->createView(),
+        return $this->render('PancakeBundle:Default:index.html.twig', array('form' => $form->createView(),
         ));
     }
 
