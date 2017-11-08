@@ -1,0 +1,60 @@
+{# src/PancakeBundle/Ressources/views/Contact/contact.html.twig #}
+{% extends 'PancakeBundle::layout.html.twig' %}
+
+{% block body %}
+<h2>Contact</h2>
+<p>Vous souhaitez nous joindre ?</p>
+
+{% if app.session.flashBag.has('success') %}
+    <div class="alert alert-success">
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+    <div class="row">
+        <div class="col"></div>
+
+        <div class="well col-8">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            {# Les erreurs générales du formulaire. #}
+            {{ form_errors(form) }}
+
+            <div class="form-group">
+                {{ form_label(form.name, "Votre nom", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.email, "Email", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.subject, "Objet", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.body, "Votre message", {'label_attr': {'class': 'control-label'}}) }}
+
+                {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+            {{ form_end(form) }}
+
+        </div>
+
+        <div class="col"></div>
+    </div>
+
+{% endblock %}
