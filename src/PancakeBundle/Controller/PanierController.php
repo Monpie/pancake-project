@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use PancakeBundle\Entity\Historique;
 use PancakeBundle\Entity\User;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class PanierController extends Controller
@@ -191,11 +192,13 @@ class PanierController extends Controller
 
     /**
      * @Route("/show/historique", name="showHistorique")
+     * @Security("has_role('ROLE_STAFF')")
      */
     public function showUserHistoriqueAction()
     {
         if ($this->getUser() != null) {
             $cpt =0;
+            $tab = array();
             foreach($this->getUser()->getPurchases() as $elem){
 
                 $tab[$cpt] = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findOneById($elem->getPancakeArray());
@@ -210,11 +213,13 @@ class PanierController extends Controller
 
     /**
      * @Route("/show/all_historique", name="showAllUserHistorique")
+     * @Security("has_role('ROLE_STAFF')")
      */
     public function showAllUserHistorique()
     {
         $em = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Historique')->findAll();
         $cpt = 0;
+        $tab = array();
         foreach($em as $elem){
             $tab[$cpt] = $this->getDoctrine()->getManager()->getRepository('PancakeBundle:Pancake')->findOneById($elem->getPancakeArray());
             $cpt++;
