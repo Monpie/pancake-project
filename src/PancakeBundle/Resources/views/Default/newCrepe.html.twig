@@ -19,7 +19,7 @@
 
         <div class="form-group">
             {{ form_label(form.price, "Prix de la crêpe (en €)", {'label_attr': {'class': 'control-label'}}) }}
-            {{ form_widget(form.price, {'attr': {'class': 'form-control', 'pattern': '^\d+(\.)\d{2}$', 'placeholder': '00.00'}}) }}
+            {{ form_widget(form.price, {'attr': {'class': 'form-control', 'pattern': '^\\d+(\\.)\\d{2}$', 'placeholder': '00.00'}}) }}
         </div>
 
         <div class="form-group">
